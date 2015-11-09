@@ -19,6 +19,7 @@ int main() {
 		cout << "Erro inicializando allegro" << endl;
 	}
 
+	cout << "Teste de git" << endl;
 
 	ALLEGRO_DISPLAY *tela = al_create_display(LARGURA, ALTURA);
 	ALLEGRO_TIMER *timer = al_create_timer(1.0/60.0);
