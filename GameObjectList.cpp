@@ -41,26 +41,47 @@ using namespace std;
             }
             atual->prox = novo;
         }
+        std::cout << "Bala adicionada na lista com x: "<< item->posicao_x << " e y: " << item->posicao_y << std::endl;
 
 
     }
 
-
-   /* Queue *novoItem = new Queue;
-    novoItem->item = v;
-    novoItem->proximo = NULL;
- 
-    if(f == NULL) {
-        f = novoItem;
-    }
-    else {
-        Queue *aux = f;
-        while(aux->proximo !=NULL) {
-            aux = aux->proximo;
+    void GameObjectList::RemoverSeq(GameObject *item) {
+        NoDaLista *aux;
+        if (this->inicio == NULL ) {
+            cout << "Lista vazia" << endl;
         }
-        aux->proximo = novoItem;
+        else {
+            aux = inicio->prox;
+            delete(item);
+        }
     }
-    return f;*/
+
+    void GameObjectList::Remover(GameObject *item) {
+        if(this->inicio == NULL) {
+            cout << "Lista vazia" << endl;
+        }
+        else {
+            NoDaLista *old = NULL;
+            NoDaLista *curr = this->inicio;
+            while (curr != NULL) {
+                if (curr->valor == item) {
+                    if(old != NULL) {
+                        old->prox = curr->prox;
+                    }
+                    else {
+                        this->inicio = curr->prox;
+                    }
+                    delete(curr);
+                    delete(item);
+                    return;
+                }
+                old = curr;
+                curr = curr->prox;
+            }       
+        }
+    }
+
 
     int GameObjectList::MouseDown(float x, float y){
         NoDaLista *aux = inicio;

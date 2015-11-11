@@ -1,11 +1,13 @@
 #ifndef BULLET_H_INCLUDED
 #define BULLET_H_INCLUDED
+#define SIZEBULLET 5
 #include <iostream>
 #include <cstring>
 #include <allegro5/allegro.h>
 #include "GameObject.h"
 #include <math.h> 
 #include "Nave.h"
+
 
 
 class Bullet: public GameObject{
@@ -16,7 +18,7 @@ class Bullet: public GameObject{
 
 		Bullet();
 
-		void Novo();
+		void Novo(Nave n, GameObjectList *Bullets);
 
 		void Start();
 

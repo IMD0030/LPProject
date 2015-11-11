@@ -13,11 +13,14 @@ Circulo.o: GameObject.o Circulo.h Circulo.cpp
 Retangulo.o: GameObject.o Retangulo.h Retangulo.cpp
 	g++ Retangulo.cpp -c
 
+Bullet.o: GameObject.o Bullet.h Bullet.cpp
+	g++ Bullet.cpp -c
+
 GameObjectList.o: GameObject.o GameObjectList.h GameObjectList.cpp
 	g++ GameObjectList.cpp -c
 
-main: main.cpp Utils.o Nave.o GameObject.o GameObjectList.o Circulo.o Retangulo.o
-	g++ main.cpp Utils.o Nave.o GameObject.o GameObjectList.o Circulo.o Retangulo.o -lallegro -lallegro_primitives -lallegro_main -o main 
+main: main.cpp Utils.o Nave.o GameObject.o GameObjectList.o Circulo.o Retangulo.o Bullet.o
+	g++ main.cpp Utils.o Nave.o GameObject.o GameObjectList.o Circulo.o Retangulo.o Bullet.o -lallegro -lallegro_primitives -lallegro_main -o main 
 
 clean:
 	rm -f *.o main

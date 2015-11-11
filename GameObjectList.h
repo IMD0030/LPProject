@@ -20,6 +20,10 @@ public:
 
 	void Adicionar(GameObject *item);
 
+	void RemoverSeq(GameObject *item);
+
+	void Remover(GameObject *item);
+
 	int MouseDown(float x, float y);
 };
 

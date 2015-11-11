@@ -46,12 +46,13 @@ int main() {
 	/*Variavel que verifica estado do jogo*/
     bool finalized = false;
 
-    /*Player/Nave Do Jogador*/
-    Nave *navePlayer = new Nave(LARGURA/2, ALTURA); 
+    /*Player Nave Do Jogador*/
+    Nave *navePlayer = new Nave(LARGURA/2, ALTURA);
+    Bullet *bullet = new Bullet();
 
     /*Lista de Objetos (Inimigos ou Asteroides)*/
+    GameObjectList *ListaBullets = new GameObjectList();
     GameObjectList *l = new GameObjectList();
-    GameObjectList *ListaDeBalas = new GameObjectList();
     Utils *TesteUtil = new Utils();
 
     GameObject *bola = new Circulo();
@@ -96,6 +97,8 @@ int main() {
 				finalized = true;
 			}
 			if(evento.keyboard.keycode == ALLEGRO_KEY_SPACE){
+				//cout << navePlayer->p_x << endl;
+				bullet->Novo(*navePlayer, ListaBullets);
 				cout << "KEYDOWN: " << evento.keyboard.keycode << endl;
 				//CRIAR OBJETO NO MOMENTO
 				//GameObject *B = new Bullet();

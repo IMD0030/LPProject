@@ -12,10 +12,12 @@ Bullet::Bullet() {
 	
 }
 
-void Novo(Nave n, GameObjectList *Bullets) {
+void Bullet::Novo(Nave n, GameObjectList *Bullets) {
 	Bullet *tiro = new Bullet();
 	tiro->posicao_x = n.p_x;
 	tiro->posicao_y = n.p_y;
+	tiro->raio = SIZEBULLET;
+	std::cout << "Bala adicionada x: "<< n.p_x << " e y: " << n.p_y << std::endl;
 	Bullets->Adicionar(tiro);
 }
 
