@@ -4,20 +4,29 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <typeinfo>
+#include <string>
+#include <cstring>
 #include "Nave.h"
 #include "GameObject.h"
 #include "GameObjectList.h"
 #include "Circulo.h"
 #include "Retangulo.h"
+#include "Bullet.h"
+#include "Utils.h"
+#include <string.h>
+#include <sstream>
 
 
 using namespace std;
+
+
 
 int main() {
 
     if (!al_init()) {
 		cout << "Erro inicializando allegro" << endl;
 	}
+
 
 	cout << "Teste de git" << endl;
 
@@ -42,6 +51,8 @@ int main() {
 
     /*Lista de Objetos (Inimigos ou Asteroides)*/
     GameObjectList *l = new GameObjectList();
+    GameObjectList *ListaDeBalas = new GameObjectList();
+    Utils *TesteUtil = new Utils();
 
     GameObject *bola = new Circulo();
     if (typeid(*bola) == typeid(Circulo)) {
@@ -77,17 +88,22 @@ int main() {
 		if(al_key_down(&estado_teclado, ALLEGRO_KEY_D) || al_key_down(&estado_teclado, ALLEGRO_KEY_RIGHT)){
 			navePlayer->Right();
 		}
-		
+
 		//navePlayer->Update(estado_teclado*, evento);
 
 		if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
 			if(evento.keyboard.keycode == 59 || evento.keyboard.keycode==ALLEGRO_KEY_ESCAPE) {
 				finalized = true;
 			}
+			if(evento.keyboard.keycode == ALLEGRO_KEY_SPACE){
+				cout << "KEYDOWN: " << evento.keyboard.keycode << endl;
+				//CRIAR OBJETO NO MOMENTO
+				//GameObject *B = new Bullet();
+			}
 			else {
 				//navePlayer->Update(&estado_teclado, evento);
 				//navePlayer->Update(&estado_teclado);
-				//cout << "KEYDOWN: " << evento.keyboard.keycode << endl;
+				cout << "KEYDOWN: " << evento.keyboard.keycode << endl;
 			}
 			
 		}
