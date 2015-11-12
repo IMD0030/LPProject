@@ -31,7 +31,7 @@ int main() {
 	cout << "Teste de git" << endl;
 
 	ALLEGRO_DISPLAY *tela = al_create_display(LARGURA, ALTURA);
-	ALLEGRO_TIMER *timer = al_create_timer(1.0/60.0);
+	ALLEGRO_TIMER *timer = al_create_timer(1.0/30.0);
     ALLEGRO_EVENT_QUEUE *fila_eventos = al_create_event_queue();
 
 	al_install_keyboard();
@@ -119,14 +119,17 @@ int main() {
 		}
 
 		if (evento.type == ALLEGRO_EVENT_TIMER) {
-				// atualizar estado
+			
+			// desenhar
+			ListaBullets->Render();
+			navePlayer->Render();
+			bola->Render();
+			ret->Render();
+			al_flip_display();
+			al_clear_to_color(al_map_rgb(255, 255, 255));
 
-				// desenhar
-				navePlayer->Render();
-				bola->Render();
-				ret->Render();
-				al_flip_display();
-				al_clear_to_color(al_map_rgb(255, 255, 255));
+			// atualizar estado
+			ListaBullets->Update();
 		}
 
 	}

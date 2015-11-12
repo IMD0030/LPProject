@@ -24,6 +24,10 @@ public:
 
 	void Remover(GameObject *item);
 
+	void Render();
+
+	void Update();
+
 	int MouseDown(float x, float y);
 };
 

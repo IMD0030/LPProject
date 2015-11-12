@@ -57,7 +57,7 @@ using namespace std;
         }
     }
 
-    void GameObjectList::Remover(GameObject *item) {
+    void GameObjectList::Remover(GameObject *item){
         if(this->inicio == NULL) {
             cout << "Lista vazia" << endl;
         }
@@ -82,6 +82,21 @@ using namespace std;
         }
     }
 
+    void GameObjectList::Render(){
+        NoDaLista *aux = inicio;
+        while (aux != NULL){
+            aux->valor->Render();
+            aux = aux->prox;
+        }
+    }
+
+    void GameObjectList::Update(){
+        NoDaLista *aux = inicio;
+        while (aux != NULL){
+            aux->valor->Update();
+            aux = aux->prox;
+        }
+    }
 
     int GameObjectList::MouseDown(float x, float y){
         NoDaLista *aux = inicio;

@@ -14,9 +14,10 @@ Bullet::Bullet() {
 
 void Bullet::Novo(Nave n, GameObjectList *Bullets) {
 	Bullet *tiro = new Bullet();
-	tiro->posicao_x = n.p_x;
+	tiro->posicao_x = n.p_x + n.tamanho/2;
 	tiro->posicao_y = n.p_y;
 	tiro->raio = SIZEBULLET;
+	tiro->velocidade_y = 15;
 	std::cout << "Bala adicionada x: "<< n.p_x << " e y: " << n.p_y << std::endl;
 	Bullets->Adicionar(tiro);
 }
@@ -26,6 +27,14 @@ void Bullet::Start(){
 }
 
 void Bullet::Update(){
+	this->posicao_y -= this->velocidade_y;
+
+	if (this->posicao_y <= 0) {
+		this->posicao_y = 0;
+
+		std :: cout << "essa bala precisa ser destruida" << std::endl;
+	}
+
     std::cout << "Atualize!" << std::endl;
 }
 
