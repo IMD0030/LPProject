@@ -15,6 +15,7 @@ public:
 class GameObjectList {
 public:
     NoDaLista *inicio;
+    //float tam_x, tam_y;
 
     GameObjectList();
 
@@ -27,6 +28,8 @@ public:
 	void Render();
 
 	void Update();
+
+	//void Update(GameObjectList *Lista);
 
 	int MouseDown(float x, float y);
 };

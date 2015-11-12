@@ -15,6 +15,7 @@
 #include "Utils.h"
 #include <string.h>
 #include <sstream>
+#include "Asteroide.h"
 
 
 using namespace std;
@@ -45,13 +46,19 @@ int main() {
 
 	/*Variavel que verifica estado do jogo*/
     bool finalized = false;
+    int astInimigo = 0;
+    float astPX = 0, oldastPX = 0, velPY = 0;
+    int menorPX=1;
 
     /*Player Nave Do Jogador*/
     Nave *navePlayer = new Nave(LARGURA/2, ALTURA);
     Bullet *bullet = new Bullet();
+    Asteroide *aste = new Asteroide();
 
     /*Lista de Objetos (Inimigos ou Asteroides)*/
     GameObjectList *ListaBullets = new GameObjectList();
+    GameObjectList *ListaAsteroides = new GameObjectList();
+
     GameObjectList *l = new GameObjectList();
     Utils *TesteUtil = new Utils();
 
@@ -97,11 +104,20 @@ int main() {
 				finalized = true;
 			}
 			if(evento.keyboard.keycode == ALLEGRO_KEY_SPACE){
-				//cout << navePlayer->p_x << endl;
 				bullet->Novo(*navePlayer, ListaBullets);
 				cout << "KEYDOWN: " << evento.keyboard.keycode << endl;
-				//CRIAR OBJETO NO MOMENTO
-				//GameObject *B = new Bullet();
+			}
+			if(evento.keyboard.keycode == ALLEGRO_KEY_I){
+				while(oldastPX == astPX){
+					astPX = rand()%(LARGURA-menorPX)+menorPX;
+				}
+				oldastPX=astPX;
+				velPY = rand()%(25-5)+5;
+				cout << "posicao_x: " << astPX << endl;
+				cout << "Velocidade y: " << velPY << endl;
+				aste->Novo(ListaAsteroides, astPX, 5, velPY);
+
+				//GameObjectList *Asteroides, float px, int s, float vel)
 			}
 			else {
 				//navePlayer->Update(&estado_teclado, evento);
@@ -110,9 +126,14 @@ int main() {
 			}
 			
 		}
-
-
-
+		while(oldastPX == astPX){
+			astPX = rand()%(LARGURA-menorPX)+menorPX;
+		}
+		oldastPX=astPX;
+		velPY = rand()%(10-3)+5;
+		cout << "posicao_x: " << astPX << endl;
+		cout << "Velocidade y: " << velPY << endl;
+		
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
 			l->MouseDown(evento.mouse.x, evento.mouse.y);
@@ -120,8 +141,17 @@ int main() {
 
 		if (evento.type == ALLEGRO_EVENT_TIMER) {
 			
+			//definir e criar inimigo
+			astInimigo++;
+			if(astInimigo == 15){
+				aste->Novo(ListaAsteroides, astPX, 2, velPY);
+				astInimigo = 0;
+			}
+
+
 			// desenhar
 			ListaBullets->Render();
+			ListaAsteroides->Render();
 			navePlayer->Render();
 			bola->Render();
 			ret->Render();
@@ -129,7 +159,10 @@ int main() {
 			al_clear_to_color(al_map_rgb(255, 255, 255));
 
 			// atualizar estado
+			//ListaBullets->Update(ListaBullets);
+
 			ListaBullets->Update();
+			ListaAsteroides->Update();
 		}
 
 	}

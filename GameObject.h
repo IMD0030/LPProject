@@ -4,6 +4,7 @@
 #include <allegro5/allegro_primitives.h>
 #include <string>
 #include <typeinfo>
+//#include "GameObjectList.h"
 
 class GameObject{
     public:
@@ -16,6 +17,8 @@ class GameObject{
 		GameObject(std::string nome="", float px=0, float py=0, float vx=0, float vy=0, float atr=0, float s=0);
 
 		virtual void Start();
+
+		//virtual void Update(GameObject *item, GameObjectList *Lista);
 
 		virtual void Update();
 

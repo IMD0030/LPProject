@@ -26,16 +26,17 @@ void Bullet::Start(){
     std::cout << "Iniciei!" << std::endl;
 }
 
+//void Bullet::Update(GameObject *item, GameObjectList Bullets)
 void Bullet::Update(){
 	this->posicao_y -= this->velocidade_y;
 
 	if (this->posicao_y <= 0) {
 		this->posicao_y = 0;
-
 		std :: cout << "essa bala precisa ser destruida" << std::endl;
+		//return 1;
 	}
-
-    std::cout << "Atualize!" << std::endl;
+	std::cout << "Atualize!" << std::endl;
+	//return 0;
 }
 
 void Bullet::Render(){

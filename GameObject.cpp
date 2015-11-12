@@ -24,6 +24,10 @@
 			std::cout << "Eu atualizei meu objeto: " << this->nome << "." << std::endl;
 		}
 
+		/*void GameObject::Update(GameObject *item, GameObjectList *Lista){
+			std::cout << "Eu atualizei meu objeto: " << this->nome << "." << std::endl;
+		}*/
+
 		void GameObject::Render(){
 			std::cout << "Eu renderizei meu objeto: " << this->nome << "." << std::endl;
 		}

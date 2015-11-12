@@ -90,11 +90,19 @@ using namespace std;
         }
     }
 
+    //void GameObjectList::Update(GameObjectList *Lista)
     void GameObjectList::Update(){
         NoDaLista *aux = inicio;
         while (aux != NULL){
+            //aux->valor->Update(aux->valor, Lista);
             aux->valor->Update();
             aux = aux->prox;
+
+            /*   if(aux->valor->Update()){
+                NoDaLista *rem = aux;
+                aux = aux->prox;
+                Remover(rem);
+            }*/
         }
     }
 

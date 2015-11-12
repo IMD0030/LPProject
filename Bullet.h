@@ -8,13 +8,10 @@
 #include <math.h> 
 #include "Nave.h"
 
-
-
 class Bullet: public GameObject{
 	public:
 		float raio;
 		int	id;
-
 
 		Bullet();
 
@@ -23,6 +20,8 @@ class Bullet: public GameObject{
 		void Start();
 
 		void Update();
+
+		//void Update(GameObject *item, GameObjectList Bullets);
 
 		void Render();
 };

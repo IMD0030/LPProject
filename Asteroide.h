@@ -8,18 +8,20 @@
 
 class Asteroide: public GameObject{
 	public:
-		int id, ponto, raio;
+		int id, ponto, s;
 		float vida;
 
-		Asteroide(std::string nome="Asteroide", float px=0, float py=0, float vx=0, float vy=0, float atr=0, float r=1);
+		//Asteroide(std::string nome="Asteroide", float px=0, float py=0, float vx=0, float vy=0, float atr=0, float r=1);
+
+		Asteroide();
+
+		void Novo(GameObjectList *Asteroides, float px, int s, float vel);
 
 		void Start();
 
 		void Update();
 
 		void Render();
-
-		int MouseDown(float x, float y);
 };
 
 #endif	
