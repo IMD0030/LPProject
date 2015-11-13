@@ -63,6 +63,7 @@ using namespace std;
             cout << "Lista vazia" << endl;
         }
         else {
+            cout << "removendo objeto" << endl;
             NoDaLista *old = NULL;
             NoDaLista *curr = this->inicio;
             while (curr != NULL) {
@@ -107,7 +108,36 @@ using namespace std;
     void GameObjectList::Impacto(GameObjectList *Lista){
         NoDaLista *auxUm = this->inicio;
         NoDaLista *auxDois = Lista->inicio;
+        NoDaLista *morrerUM, *morrerDois;
         while(auxUm != NULL){
+            std::cout << "A lista de tiro não eh null" << std::endl;  
+            while(auxDois != NULL){
+                std::cout << "A lista de meteoro não eh null" << std::endl;
+                if(sqrt((auxDois->valor->posicao_x - auxUm->valor->posicao_x) * (auxDois->valor->posicao_x - auxUm->valor->posicao_x) + 
+                        (auxDois->valor->posicao_y - auxUm->valor->posicao_y) * (auxDois->valor->posicao_y - auxUm->valor->posicao_y)) 
+                        <= auxUm->valor->size + auxDois->valor->size){
+                    std::cout << "Existem elementos para serem destruidos" << std::endl;
+                    /*if(auxUm->prox!=NULL){
+                        auxUm=auxUm->prox;
+                    }
+                    if(auxDois->prox!=NULL){
+                        auxDois=auxDois->prox;
+                    }*/
+                    /*morrerUM = auxUm;
+                    auxUm = auxUm->prox;
+                    morrerDois = auxDois;
+                    auxDois = auxDois->prox;*/
+                    /*this->Remover(auxUm->valor);
+                    Lista->Remover(auxDois->valor);*/
+                }
+                auxDois=auxDois->prox;
+            }
+            auxUm=auxUm->prox;
+        }
+        /*else{
+            std::cout << "nao existe" << std::endl;
+        }*/
+        /*while(auxUm != NULL){
             while(auxDois !=NULL){
                 if(sqrt((auxDois->valor->posicao_x - auxUm->valor->posicao_x) * (auxDois->valor->posicao_x - auxUm->valor->posicao_x) + 
                         (auxDois->valor->posicao_y - auxUm->valor->posicao_y) * (auxDois->valor->posicao_y - auxUm->valor->posicao_y)) 
@@ -119,7 +149,7 @@ using namespace std;
                 auxDois=auxDois->prox;
             }
             auxUm=auxUm->prox;
-        }
+        }*/
 
     }
 
