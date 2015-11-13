@@ -3,9 +3,7 @@
 #include <typeinfo>
 #include <allegro5/allegro.h>
 #include "GameObject.h"
-#include "Circulo.h"
 #include "GameObjectList.h"
-#include <math.h> 
 #include "Asteroide.h"
 
 Asteroide::Asteroide() {
@@ -24,12 +22,13 @@ void Asteroide::Start(){
     std::cout << "Iniciei!" << std::endl;
 }
 
-void Asteroide::Update(){
-	std :: cout << "esse Asteroide tem velocidade" << this->velocidade_y<< std::endl;
+void Asteroide::Update(GameObject *item, GameObjectList *Lista){
+//void Asteroide::Update(){
+	//std :: cout << "esse Asteroide tem velocidade" << this->velocidade_y<< std::endl;
     this->posicao_y += this->velocidade_y;
 	if (this->posicao_y >= 600) {
 		this->posicao_y = 600;
-		std :: cout << "esse Asteroide precisa ser destruida" << std::endl;
+		//std :: cout << "esse Asteroide precisa ser destruida" << std::endl;
 		//return 1;
 	}
 }

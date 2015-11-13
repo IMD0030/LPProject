@@ -41,7 +41,7 @@ using namespace std;
             }
             atual->prox = novo;
         }
-        std::cout << "Bala adicionada na lista com x: "<< item->posicao_x << " e y: " << item->posicao_y << std::endl;
+        //std::cout << "Bala adicionada na lista com x: "<< item->posicao_x << " e y: " << item->posicao_y << std::endl;
 
 
     }
@@ -90,12 +90,12 @@ using namespace std;
         }
     }
 
-    //void GameObjectList::Update(GameObjectList *Lista)
-    void GameObjectList::Update(){
+    void GameObjectList::Update(GameObjectList *Lista){
+    //void GameObjectList::Update(){
         NoDaLista *aux = inicio;
         while (aux != NULL){
-            //aux->valor->Update(aux->valor, Lista);
-            aux->valor->Update();
+            aux->valor->Update(aux->valor, Lista);
+            //aux->valor->Update();
             aux = aux->prox;
 
             /*   if(aux->valor->Update()){
@@ -104,6 +104,21 @@ using namespace std;
                 Remover(rem);
             }*/
         }
+    }
+
+    void GameObjectList::Impacto(GameObjectList *Lista){
+        NoDaLista *auxUm = this->inicio;
+        NoDaLista *auxDois = Lista->inicio;
+        while(auxUm != NULL){
+            while(auxDois !=NULL){
+                if(auxUm->valor->posicao_x == auxDois->valor->posicao_x && auxUm->valor->posicao_y == auxDois->valor->posicao_x){
+                    std::cout << "Existem elementos para serem destruidos" << std::endl;
+                }
+                auxDois=auxDois->prox;
+            }
+            auxUm=auxUm->prox;
+        }
+
     }
 
     int GameObjectList::MouseDown(float x, float y){

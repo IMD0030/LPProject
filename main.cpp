@@ -17,9 +17,7 @@
 #include <sstream>
 #include "Asteroide.h"
 
-
 using namespace std;
-
 
 
 int main() {
@@ -131,8 +129,8 @@ int main() {
 		}
 		oldastPX=astPX;
 		velPY = rand()%(10-3)+5;
-		cout << "posicao_x: " << astPX << endl;
-		cout << "Velocidade y: " << velPY << endl;
+		/*cout << "posicao_x: " << astPX << endl;
+		cout << "Velocidade y: " << velPY << endl;*/
 		
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
@@ -147,22 +145,27 @@ int main() {
 				aste->Novo(ListaAsteroides, astPX, 2, velPY);
 				astInimigo = 0;
 			}
+			//asteroide definido e criado
 
 
 			// desenhar
 			ListaBullets->Render();
 			ListaAsteroides->Render();
 			navePlayer->Render();
-			bola->Render();
-			ret->Render();
+	
+
+			/*bola->Render();
+			ret->Render();*/
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(255, 255, 255));
 
 			// atualizar estado
-			//ListaBullets->Update(ListaBullets);
+			ListaBullets->Update(ListaBullets);
 
-			ListaBullets->Update();
-			ListaAsteroides->Update();
+			//ListaBullets->Update();
+			ListaAsteroides->Update(ListaAsteroides);
+
+			ListaBullets->Impacto(ListaAsteroides);
 		}
 
 	}

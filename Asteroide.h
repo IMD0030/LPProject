@@ -19,7 +19,9 @@ class Asteroide: public GameObject{
 
 		void Start();
 
-		void Update();
+		//void Update();
+
+		void Update(GameObject *item, GameObjectList *Lista);
 
 		void Render();
 };

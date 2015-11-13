@@ -6,6 +6,8 @@
 #include <typeinfo>
 #include "GameObject.h"
 
+class GameObject;
+
 class NoDaLista {
 public:
 	GameObject *valor;
@@ -27,9 +29,11 @@ public:
 
 	void Render();
 
-	void Update();
+	//void Update();
 
-	//void Update(GameObjectList *Lista);
+	void Update(GameObjectList *Lista);
+
+	void Impacto(GameObjectList *Lista);
 
 	int MouseDown(float x, float y);
 };

@@ -19,9 +19,9 @@ class Bullet: public GameObject{
 
 		void Start();
 
-		void Update();
+		//void Update();
 
-		//void Update(GameObject *item, GameObjectList Bullets);
+		void Update(GameObject *item, GameObjectList *Lista);
 
 		void Render();
 };
