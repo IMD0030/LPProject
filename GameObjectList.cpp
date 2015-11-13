@@ -7,6 +7,7 @@
 #include "GameObjectList.h"
 #include "Circulo.h"
 #include "Retangulo.h"
+#include <math.h>
 
 
 using namespace std;
@@ -90,19 +91,16 @@ using namespace std;
         }
     }
 
-    void GameObjectList::Update(GameObjectList *Lista){
-    //void GameObjectList::Update(){
+    //void GameObjectList::Update(GameObjectList *Lista){
+    void GameObjectList::Update(){
         NoDaLista *aux = inicio;
         while (aux != NULL){
-            aux->valor->Update(aux->valor, Lista);
-            //aux->valor->Update();
+            aux->valor->Update();
+            if(aux->valor->Devo_Morrer()){
+                this->Remover(aux->valor);
+            }
+            
             aux = aux->prox;
-
-            /*   if(aux->valor->Update()){
-                NoDaLista *rem = aux;
-                aux = aux->prox;
-                Remover(rem);
-            }*/
         }
     }
 
@@ -111,8 +109,12 @@ using namespace std;
         NoDaLista *auxDois = Lista->inicio;
         while(auxUm != NULL){
             while(auxDois !=NULL){
-                if(auxUm->valor->posicao_x == auxDois->valor->posicao_x && auxUm->valor->posicao_y == auxDois->valor->posicao_x){
+                if(sqrt((auxDois->valor->posicao_x - auxUm->valor->posicao_x) * (auxDois->valor->posicao_x - auxUm->valor->posicao_x) + 
+                        (auxDois->valor->posicao_y - auxUm->valor->posicao_y) * (auxDois->valor->posicao_y - auxUm->valor->posicao_y)) 
+                        <= auxUm->valor->size + auxDois->valor->size){
                     std::cout << "Existem elementos para serem destruidos" << std::endl;
+                    this->Remover(auxUm->valor);
+                    Lista->Remover(auxDois->valor);
                 }
                 auxDois=auxDois->prox;
             }

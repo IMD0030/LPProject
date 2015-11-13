@@ -5,6 +5,7 @@
 #include <string>
 #include <typeinfo>
 #include "GameObject.h"
+#include <math.h>
 
 class GameObject;
 
@@ -29,9 +30,9 @@ public:
 
 	void Render();
 
-	//void Update();
+	void Update();
 
-	void Update(GameObjectList *Lista);
+	//void Update(GameObjectList *Lista);
 
 	void Impacto(GameObjectList *Lista);
 

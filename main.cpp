@@ -76,7 +76,8 @@ int main() {
     ALLEGRO_EVENT evento;
     ALLEGRO_KEYBOARD_STATE estado_teclado;
 	al_start_timer(timer);
-
+	//testes
+	//aste->Novo(ListaAsteroides, LARGURA/2, 2, 2);
 	while (!finalized) {
 
 
@@ -110,11 +111,8 @@ int main() {
 					astPX = rand()%(LARGURA-menorPX)+menorPX;
 				}
 				oldastPX=astPX;
-				velPY = rand()%(25-5)+5;
-				cout << "posicao_x: " << astPX << endl;
-				cout << "Velocidade y: " << velPY << endl;
-				aste->Novo(ListaAsteroides, astPX, 5, velPY);
-
+				velPY = rand()%(10-3)+5;
+				aste->Novo(ListaAsteroides, astPX, 2, 2);
 				//GameObjectList *Asteroides, float px, int s, float vel)
 			}
 			else {
@@ -140,11 +138,11 @@ int main() {
 		if (evento.type == ALLEGRO_EVENT_TIMER) {
 			
 			//definir e criar inimigo
-			astInimigo++;
-			if(astInimigo == 15){
+			/*astInimigo++;
+			if(astInimigo == 30){
 				aste->Novo(ListaAsteroides, astPX, 2, velPY);
 				astInimigo = 0;
-			}
+			}*/
 			//asteroide definido e criado
 
 
@@ -160,10 +158,11 @@ int main() {
 			al_clear_to_color(al_map_rgb(255, 255, 255));
 
 			// atualizar estado
-			ListaBullets->Update(ListaBullets);
+			//ListaBullets->Update(ListaBullets);
 
-			//ListaBullets->Update();
-			ListaAsteroides->Update(ListaAsteroides);
+			ListaBullets->Update();
+			ListaAsteroides->Update();
+			//ListaAsteroides->Update(ListaAsteroides);
 
 			ListaBullets->Impacto(ListaAsteroides);
 		}
