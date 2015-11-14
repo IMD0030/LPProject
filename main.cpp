@@ -126,7 +126,8 @@ int main() {
 			astPX = rand()%(LARGURA-menorPX)+menorPX;
 		}
 		oldastPX=astPX;
-		velPY = rand()%(10-3)+5;
+		velPY = rand()%(10-2)+2;
+		velPY = 2;
 		/*cout << "posicao_x: " << astPX << endl;
 		cout << "Velocidade y: " << velPY << endl;*/
 		
@@ -138,11 +139,11 @@ int main() {
 		if (evento.type == ALLEGRO_EVENT_TIMER) {
 			
 			//definir e criar inimigo
-			/*astInimigo++;
-			if(astInimigo == 30){
+			astInimigo++;
+			if(astInimigo == 35){
 				aste->Novo(ListaAsteroides, astPX, 2, velPY);
 				astInimigo = 0;
-			}*/
+			}
 			//asteroide definido e criado
 
 

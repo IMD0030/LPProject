@@ -32,6 +32,8 @@ public:
 
 	void Update();
 
+	int ObjectCont();
+
 	//void Update(GameObjectList *Lista);
 
 	void Impacto(GameObjectList *Lista);

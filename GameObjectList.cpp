@@ -67,19 +67,27 @@ using namespace std;
             NoDaLista *old = NULL;
             NoDaLista *curr = this->inicio;
             while (curr != NULL) {
+                cout << "Entrou no while da remocao" << endl;
                 if (curr->valor == item) {
+                    cout << "Compara se o valor currente é o que eu quero" << endl;
                     if(old != NULL) {
+                        cout << "verificou o antigo não tem ninguem e mandou pra o proximo" << endl;
                         old->prox = curr->prox;
                     }
                     else {
+                        cout << "viu que o antigo tem alguem" << endl;
                         this->inicio = curr->prox;
                     }
+                    cout << "Apagando a galera" << endl;
                     delete(curr);
                     delete(item);
+                    cout << "Galera apagada" << endl;
                     return;
                 }
+                cout << "Atribuindo o novo old" << endl;
                 old = curr;
                 curr = curr->prox;
+                cout << "removendo objeto final" << endl;
             }       
         }
     }
@@ -108,7 +116,6 @@ using namespace std;
     void GameObjectList::Impacto(GameObjectList *Lista){
         NoDaLista *auxUm = this->inicio;
         NoDaLista *auxDois = Lista->inicio;
-        NoDaLista *morrerUM, *morrerDois;
         while(auxUm != NULL){
             std::cout << "A lista de tiro não eh null" << std::endl;  
             while(auxDois != NULL){
@@ -117,6 +124,24 @@ using namespace std;
                         (auxDois->valor->posicao_y - auxUm->valor->posicao_y) * (auxDois->valor->posicao_y - auxUm->valor->posicao_y)) 
                         <= auxUm->valor->size + auxDois->valor->size){
                     std::cout << "Existem elementos para serem destruidos" << std::endl;
+                    NoDaLista *aux_prox = auxDois->prox;
+                    if(aux_prox == NULL) {
+                        cout << "Esse elemento é o ultimo" << endl << endl << endl;
+                    }
+                    cout << "removendo um asteroid"<<endl<<endl<<endl;
+                    Lista->Remover(auxDois->valor);
+                    //cout << "Tudo foi removido com classe" << endl;
+                    //cout << "Passando o proximo para o atual" << endl;
+                    auxDois = aux_prox;
+                    cout << "Valor de auxDois depois de removido: ";
+                    //cout << auxDois->valor->posicao_x << endl;
+
+                    /*aux_prox = auxUm->prox;
+                    this->Remover(auxUm->valor);
+                    auxUm = aux_prox;*/
+
+                    cout << "quantidade de asteroides: " << Lista->ObjectCont() << endl;
+                    //delete(aux_prox);
                     /*if(auxUm->prox!=NULL){
                         auxUm=auxUm->prox;
                     }
@@ -127,12 +152,22 @@ using namespace std;
                     auxUm = auxUm->prox;
                     morrerDois = auxDois;
                     auxDois = auxDois->prox;*/
-                    /*this->Remover(auxUm->valor);
-                    Lista->Remover(auxDois->valor);*/
                 }
-                auxDois=auxDois->prox;
+                cout << "Atribuindo um novo valor" << endl;
+                if(auxDois != NULL){
+                    cout<<"Valor de proximo eh null" <<endl;
+                    auxDois=auxDois->prox;
+                }
+                
+                
             }
-            auxUm=auxUm->prox;
+            cout << "A vericando se a bala é nulla" << endl;
+            if(auxUm !=NULL) {
+                cout << "Atribuindo a bala para a proxima" << endl;
+                auxUm=auxUm->prox;    
+            }
+            cout << "quantidade de balas: " << this->ObjectCont() << endl;
+            
         }
         /*else{
             std::cout << "nao existe" << std::endl;
@@ -150,7 +185,18 @@ using namespace std;
             }
             auxUm=auxUm->prox;
         }*/
+        //cout << "balas devem ser zero: " << this->ObjectCont() << endl;
+    }
 
+    int GameObjectList::ObjectCont(){
+        NoDaLista *aux = this->inicio;
+        int qtd = 0;
+        while(aux != NULL){
+            cout << "contando as balas" << endl;
+            aux = aux->prox;
+            qtd++;
+        }
+        return qtd;
     }
 
     int GameObjectList::MouseDown(float x, float y){
