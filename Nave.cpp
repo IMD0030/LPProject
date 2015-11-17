@@ -5,6 +5,7 @@
 #include <allegro5/allegro_primitives.h>
 #include "Nave.h"
 #include "GameObjectList.h"
+
 using namespace std;
 
 
@@ -22,7 +23,7 @@ void Nave::Up(){
 		this->p_y = 0;
 	}
 	else {
-		this->p_y-=3;
+		this->p_y-=MOVIMENTO;
 	}
 }
 
@@ -31,7 +32,7 @@ void Nave::Down(){
 		this->p_y = 600 - this->tamanho;
 	}
 	else {
-		this->p_y+=3;
+		this->p_y+=MOVIMENTO;
 	}
 }
 
@@ -40,7 +41,7 @@ void Nave::Left(){
         this->p_x = 0;
     }
     else {
-        this->p_x-=3;
+        this->p_x-=MOVIMENTO;
     }
 }
 
@@ -49,7 +50,7 @@ void Nave::Right(){
         this->p_x = 800 - this->tamanho;
     }
     else {
-        this->p_x+=3;
+        this->p_x+=MOVIMENTO;
     }
 }
 

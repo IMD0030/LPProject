@@ -6,8 +6,10 @@
 #include <typeinfo>
 #include "GameObject.h"
 #include <math.h>
+#include "Nave.h"
 
 class GameObject;
+class Nave;
 
 class NoDaLista {
 public:
@@ -40,7 +42,7 @@ public:
 
 	void Impacto(GameObjectList *Lista);
 
-	void ImpactoFirstElement(GameObjectList *Lista);
+	void ImpactoFirstElement(Nave *n, GameObjectList *Lista);
 
 	int MouseDown(float x, float y);
 };

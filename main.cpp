@@ -11,8 +11,6 @@
 #include "Nave.h"
 #include "GameObject.h"
 #include "GameObjectList.h"
-#include "Circulo.h"
-#include "Retangulo.h"
 #include "Bullet.h"
 #include "Utils.h"
 #include <string.h>
@@ -169,7 +167,7 @@ int main() {
 			navePlayer->Impacto(ListaAsteroides);
 			//cout << "A QUANTIDADE DE INIMIGOS QUE TENHO SÃO DE : " << ListaAsteroides->ObjectCont() << endl;
 
-			ListaBullets->ImpactoFirstElement(ListaAsteroides);
+			ListaBullets->ImpactoFirstElement(navePlayer, ListaAsteroides);
 		}
 
 	}

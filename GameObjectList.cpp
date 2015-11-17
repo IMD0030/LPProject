@@ -5,12 +5,13 @@
 #include <typeinfo>
 #include "GameObject.h"
 #include "GameObjectList.h"
-#include "Circulo.h"
-#include "Retangulo.h"
 #include <math.h>
+#include "Nave.h"
 
 
 using namespace std;
+
+
     GameObjectList::GameObjectList() {
         this->inicio = NULL;
     }
@@ -42,9 +43,6 @@ using namespace std;
             }
             atual->prox = novo;
         }
-        //std::cout << "Bala adicionada na lista com x: "<< item->posicao_x << " e y: " << item->posicao_y << std::endl;
-
-
     }
 
     void GameObjectList::RemoverSeq(GameObject *item) {
@@ -124,10 +122,7 @@ using namespace std;
                 std::cout << "A lista de meteoro não eh null" << std::endl;
                 if(this->Distancia(auxDois->valor->posicao_x, auxUm->valor->posicao_x, 
                                     auxDois->valor->posicao_y, auxUm->valor->posicao_y, 
-                                    auxDois->valor->size, auxUm->valor->size))
-                /*if(sqrt((auxDois->valor->posicao_x - auxUm->valor->posicao_x) * (auxDois->valor->posicao_x - auxUm->valor->posicao_x) + 
-                        (auxDois->valor->posicao_y - auxUm->valor->posicao_y) * (auxDois->valor->posicao_y - auxUm->valor->posicao_y)) 
-                        <= auxUm->valor->size + auxDois->valor->size)*/{
+                                    auxDois->valor->size, auxUm->valor->size)){
                     std::cout << "Existem elementos para serem destruidos" << std::endl;
                     NoDaLista *aux_prox = auxDois->prox;
                     if(aux_prox == NULL) {
@@ -191,7 +186,7 @@ using namespace std;
         //cout << "balas devem ser zero: " << this->ObjectCont() << endl;
     }
 
-    void GameObjectList::ImpactoFirstElement(GameObjectList *Lista){
+    void GameObjectList::ImpactoFirstElement(Nave *n, GameObjectList *Lista){
         NoDaLista *auxUm = this->inicio;
         NoDaLista *auxDois = Lista->inicio;
         while(auxUm != NULL){
@@ -206,6 +201,7 @@ using namespace std;
                     aux_prox = auxUm->prox;
                     this->Remover(auxUm->valor);
                     auxUm = aux_prox;
+                    n->kills++;
                 }
                 else{
                     auxUm = auxUm->prox;
@@ -215,6 +211,7 @@ using namespace std;
                 auxUm = auxUm->prox;
             }
         }
+        cout << "Quantidade de kill da nave eh de: " << n->kills << endl;
     }
 
 
