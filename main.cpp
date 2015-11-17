@@ -3,6 +3,8 @@
 #include <iostream>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include <typeinfo>
 #include <string>
 #include <cstring>
@@ -28,61 +30,69 @@ int main() {
 
 
 	cout << "Teste de git" << endl;
+	/*MAXIMO DE INIMIGOS */
+	int MAXINIMIGO = 10;
+	/*FREQUENCIA QUE O INIMIGO APARECE*/
+	int FREQUENCIAIMIGO=30;
+	/*Variavel que verifica estado do jogo*/
+    bool finalized = false;
+    /*CONTADOR DA FREQUENCIA DE INIMIGO*/
+    int astInimigo = 0;
+    /* VARIAVEIS PARA MUDAR A POSIÇÃO DO NOVO IMIGO*/
+    float astPX = 0, oldastPX = 0, velPY = 0;
+    int menorPX=1;
 
+    /*VARIAVEIS DO ALLEGRO*/
 	ALLEGRO_DISPLAY *tela = al_create_display(LARGURA, ALTURA);
 	ALLEGRO_TIMER *timer = al_create_timer(1.0/30.0);
     ALLEGRO_EVENT_QUEUE *fila_eventos = al_create_event_queue();
+    ALLEGRO_SAMPLE *sample=NULL;
+    ALLEGRO_EVENT evento;
+    ALLEGRO_KEYBOARD_STATE estado_teclado;
 
+    /* INSTALÇÕES DO ALLEGRO */
 	al_install_keyboard();
 	al_install_mouse();
 	al_init_primitives_addon();
+	al_init_acodec_addon();
+	al_install_audio();	
+	al_reserve_samples(1);
+	sample = al_load_sample( "Sound/StarWars.ogg" );
 
 	/*Iniciar Eventos */
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source());
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
 	al_register_event_source(fila_eventos, al_get_timer_event_source(timer));
-
-	/*Variavel que verifica estado do jogo*/
-    bool finalized = false;
-    int astInimigo = 0;
-    float astPX = 0, oldastPX = 0, velPY = 0;
-    int menorPX=1;
+	al_start_timer(timer);
+	
 
     /*Player Nave Do Jogador*/
     Nave *navePlayer = new Nave(LARGURA/2, ALTURA);
+    /*OBJETOS DO JOGO, BALAS E INIMIGOS */
     Bullet *bullet = new Bullet();
     Asteroide *aste = new Asteroide();
 
     /*Lista de Objetos (Inimigos ou Asteroides)*/
     GameObjectList *ListaBullets = new GameObjectList();
     GameObjectList *ListaAsteroides = new GameObjectList();
-
-    GameObjectList *l = new GameObjectList();
-    Utils *TesteUtil = new Utils();
-
-    GameObject *bola = new Circulo();
-    if (typeid(*bola) == typeid(Circulo)) {
-        Circulo * item = (Circulo *) bola;
-        item->posicao_x = 30;
-        item->posicao_y = 30;
-        item->raio = 10;
-        std::cout<<"Teste"<<std::endl;
-    }
     
-    GameObject *ret = new Retangulo("Quadrado", 60, 60, 0, 0, 0, 10);
-    l->Adicionar(bola);
-    l->Adicionar(ret);
     
-    ALLEGRO_EVENT evento;
-    ALLEGRO_KEYBOARD_STATE estado_teclado;
-	al_start_timer(timer);
+
+	
 	//testes
 	//aste->Novo(ListaAsteroides, LARGURA/2, 2, 2);
+	//al_play_sample(sample, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 	while (!finalized) {
 
 
 		al_wait_for_event(fila_eventos, &evento);
 		al_get_keyboard_state(&estado_teclado);
+		/*if(al_get_sample_instance_playing(*sample)){
+			cout << "Musica continua tocando, quando parar eu pego a proxima" << endl;
+		}
+		else{
+			cout << "A musica acabou, agora eu pegaria a proxima e apagaria a anterior, e a fila ta feita"<<endl;
+		}*/
 		if(al_key_down(&estado_teclado, ALLEGRO_KEY_W) || al_key_down(&estado_teclado, ALLEGRO_KEY_UP)) {
 			navePlayer->Up();
 		}
@@ -112,8 +122,7 @@ int main() {
 				}
 				oldastPX=astPX;
 				velPY = rand()%(10-3)+5;
-				aste->Novo(ListaAsteroides, astPX, 2, 2);
-				//GameObjectList *Asteroides, float px, int s, float vel)
+				aste->Novo(ListaAsteroides, astPX, 2, 1);
 			}
 			else {
 				//navePlayer->Update(&estado_teclado, evento);
@@ -127,20 +136,17 @@ int main() {
 		}
 		oldastPX=astPX;
 		velPY = rand()%(10-2)+2;
-		velPY = 2;
-		/*cout << "posicao_x: " << astPX << endl;
-		cout << "Velocidade y: " << velPY << endl;*/
-		
+		velPY = 2;		
 
-		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
+		/*if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
 			l->MouseDown(evento.mouse.x, evento.mouse.y);
-		}
+		}*/
 
 		if (evento.type == ALLEGRO_EVENT_TIMER) {
 			
-			//definir e criar inimigo
 			astInimigo++;
-			if(astInimigo == 35){
+			if(astInimigo >= FREQUENCIAIMIGO && ListaAsteroides->ObjectCont() < MAXINIMIGO){
+				//cout << "Criando novo asteroide";
 				aste->Novo(ListaAsteroides, astPX, 2, velPY);
 				astInimigo = 0;
 			}
@@ -151,21 +157,19 @@ int main() {
 			ListaBullets->Render();
 			ListaAsteroides->Render();
 			navePlayer->Render();
+
 	
 
-			/*bola->Render();
-			ret->Render();*/
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(255, 255, 255));
 
 			// atualizar estado
-			//ListaBullets->Update(ListaBullets);
-
 			ListaBullets->Update();
 			ListaAsteroides->Update();
-			//ListaAsteroides->Update(ListaAsteroides);
+			navePlayer->Impacto(ListaAsteroides);
+			//cout << "A QUANTIDADE DE INIMIGOS QUE TENHO SÃO DE : " << ListaAsteroides->ObjectCont() << endl;
 
-			ListaBullets->Impacto(ListaAsteroides);
+			ListaBullets->ImpactoFirstElement(ListaAsteroides);
 		}
 
 	}

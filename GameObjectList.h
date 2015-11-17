@@ -34,9 +34,13 @@ public:
 
 	int ObjectCont();
 
+	bool Distancia(int pxdois, int pxum, int pydois, int pyum, float sizedois, float sizeum);
+
 	//void Update(GameObjectList *Lista);
 
 	void Impacto(GameObjectList *Lista);
+
+	void ImpactoFirstElement(GameObjectList *Lista);
 
 	int MouseDown(float x, float y);
 };

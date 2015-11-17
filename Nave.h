@@ -7,6 +7,7 @@
 #include <typeinfo>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
+#include "GameObjectList.h"
 
 class Nave {
 public:
@@ -32,6 +33,8 @@ public:
 	void Update(ALLEGRO_EVENT e);
 
 	void Render();
+
+	void Impacto(GameObjectList *Lista);
 
 };
 

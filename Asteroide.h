@@ -10,6 +10,7 @@ class Asteroide: public GameObject{
 	public:
 		int id, ponto;
 		float vida;
+		int power;
 
 		//Asteroide(std::string nome="Asteroide", float px=0, float py=0, float vx=0, float vy=0, float atr=0, float r=1);
 

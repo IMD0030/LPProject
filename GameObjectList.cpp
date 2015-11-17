@@ -113,6 +113,8 @@ using namespace std;
         }
     }
 
+    //Alterar impacto para procurar pelo primeiro objeto de cada Lista
+    //Se for ele que foi atigindo, remover, se não, não remover!
     void GameObjectList::Impacto(GameObjectList *Lista){
         NoDaLista *auxUm = this->inicio;
         NoDaLista *auxDois = Lista->inicio;
@@ -120,9 +122,12 @@ using namespace std;
             std::cout << "A lista de tiro não eh null" << std::endl;  
             while(auxDois != NULL){
                 std::cout << "A lista de meteoro não eh null" << std::endl;
-                if(sqrt((auxDois->valor->posicao_x - auxUm->valor->posicao_x) * (auxDois->valor->posicao_x - auxUm->valor->posicao_x) + 
+                if(this->Distancia(auxDois->valor->posicao_x, auxUm->valor->posicao_x, 
+                                    auxDois->valor->posicao_y, auxUm->valor->posicao_y, 
+                                    auxDois->valor->size, auxUm->valor->size))
+                /*if(sqrt((auxDois->valor->posicao_x - auxUm->valor->posicao_x) * (auxDois->valor->posicao_x - auxUm->valor->posicao_x) + 
                         (auxDois->valor->posicao_y - auxUm->valor->posicao_y) * (auxDois->valor->posicao_y - auxUm->valor->posicao_y)) 
-                        <= auxUm->valor->size + auxDois->valor->size){
+                        <= auxUm->valor->size + auxDois->valor->size)*/{
                     std::cout << "Existem elementos para serem destruidos" << std::endl;
                     NoDaLista *aux_prox = auxDois->prox;
                     if(aux_prox == NULL) {
@@ -157,9 +162,7 @@ using namespace std;
                 if(auxDois != NULL){
                     cout<<"Valor de proximo eh null" <<endl;
                     auxDois=auxDois->prox;
-                }
-                
-                
+                } 
             }
             cout << "A vericando se a bala é nulla" << endl;
             if(auxUm !=NULL) {
@@ -188,15 +191,50 @@ using namespace std;
         //cout << "balas devem ser zero: " << this->ObjectCont() << endl;
     }
 
+    void GameObjectList::ImpactoFirstElement(GameObjectList *Lista){
+        NoDaLista *auxUm = this->inicio;
+        NoDaLista *auxDois = Lista->inicio;
+        while(auxUm != NULL){
+            std::cout << "A lista de tiro não eh null" << std::endl;
+            if(auxDois != NULL){
+                if(this->Distancia(auxDois->valor->posicao_x, auxUm->valor->posicao_x, 
+                                    auxDois->valor->posicao_y, auxUm->valor->posicao_y, 
+                                    auxDois->valor->size, auxUm->valor->size)){
+                    NoDaLista *aux_prox = auxDois->prox;
+                    Lista->Remover(auxDois->valor);
+                    auxDois = aux_prox;
+                    aux_prox = auxUm->prox;
+                    this->Remover(auxUm->valor);
+                    auxUm = aux_prox;
+                }
+                else{
+                    auxUm = auxUm->prox;
+                }
+            }
+            else{
+                auxUm = auxUm->prox;
+            }
+        }
+    }
+
+
     int GameObjectList::ObjectCont(){
         NoDaLista *aux = this->inicio;
         int qtd = 0;
         while(aux != NULL){
-            cout << "contando as balas" << endl;
+            //cout << "contando os objetos" << endl;
             aux = aux->prox;
             qtd++;
         }
         return qtd;
+    }
+
+    bool GameObjectList::Distancia(int pxdois, int pxum, int pydois, int pyum, float sizedois, float sizeum){
+        if( sqrt(((pxdois-pxum)*(pxdois-pxum)) + ((pydois-pyum)*(pydois-pyum))) <= (sizeum+sizedois) ){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     int GameObjectList::MouseDown(float x, float y){

@@ -15,6 +15,7 @@ void Asteroide::Novo(GameObjectList *Asteroides, float px, int s, float vel){
 	ast->posicao_y = 0;
 	ast->velocidade_y = vel;
 	ast->size=10;
+	ast->power=25;
 	Asteroides->Adicionar(ast);
 }
 

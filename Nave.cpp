@@ -4,6 +4,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include "Nave.h"
+#include "GameObjectList.h"
 using namespace std;
 
 
@@ -21,7 +22,7 @@ void Nave::Up(){
 		this->p_y = 0;
 	}
 	else {
-		this->p_y-=10;
+		this->p_y-=3;
 	}
 }
 
@@ -30,7 +31,7 @@ void Nave::Down(){
 		this->p_y = 600 - this->tamanho;
 	}
 	else {
-		this->p_y+=10;
+		this->p_y+=3;
 	}
 }
 
@@ -39,7 +40,7 @@ void Nave::Left(){
         this->p_x = 0;
     }
     else {
-        this->p_x-=10;
+        this->p_x-=3;
     }
 }
 
@@ -48,7 +49,7 @@ void Nave::Right(){
         this->p_x = 800 - this->tamanho;
     }
     else {
-        this->p_x+=10;
+        this->p_x+=3;
     }
 }
 
@@ -84,7 +85,32 @@ void Nave::Render(){
     al_draw_filled_rectangle(this->p_x, this->p_y, this->p_x+tamanho, this->p_y+tamanho, al_map_rgb(255, 0, 0));
 }
 
+void Nave::Impacto(GameObjectList *Lista){
+    NoDaLista *aux = Lista->inicio;
+    NoDaLista *aux_prox;
+    float centrox, centroy;
+    centrox = this->p_x + this->tamanho/2;
+    centroy= this->p_y+this->tamanho/2;
 
+    while(aux !=NULL){
+        if(Lista->Distancia(aux->valor->posicao_x, centrox, 
+             aux->valor->posicao_y, centroy, 
+              aux->valor->size, this->tamanho)){
+            aux_prox = aux->prox;
+            Lista->Remover(aux->valor);
+            aux= aux_prox;
+            this->vida = this->vida - 25;
+            ///cout << "Nave ATINGIDA, HOUSTON, WE HAVE A PROBLEM A VIDA EH " << this->vida  << endl;
+            if(this->vida <= 0){
+                cout << "DESCULPE, MAS O JOGO ACABOU, O JOGO TERMINOU, DESTRUA A NAVE" << endl;
+                cout << "DESCULPE, MAS O JOGO ACABOU, O JOGO TERMINOU, DESTRUA A NAVE" << endl;
+                cout << "DESCULPE, MAS O JOGO ACABOU, O JOGO TERMINOU, DESTRUA A NAVE" << endl;
+                cout << "DESCULPE, MAS O JOGO ACABOU, O JOGO TERMINOU, DESTRUA A NAVE" << endl;
+                cout << "DESCULPE, MAS O JOGO ACABOU, O JOGO TERMINOU, DESTRUA A NAVE" << endl;
+                cout << "DESCULPE, MAS O JOGO ACABOU, O JOGO TERMINOU, DESTRUA A NAVE" << endl;
 
-
-		
+            }
+        }
+        aux=aux->prox;
+    }
+}	
