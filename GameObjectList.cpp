@@ -186,11 +186,12 @@ using namespace std;
         //cout << "balas devem ser zero: " << this->ObjectCont() << endl;
     }
 
-    void GameObjectList::ImpactoFirstElement(Nave *n, GameObjectList *Lista){
+    bool GameObjectList::ImpactoFirstElement(Nave *n, GameObjectList *Lista){
         NoDaLista *auxUm = this->inicio;
         NoDaLista *auxDois = Lista->inicio;
+        bool impacto = false;
         while(auxUm != NULL){
-            std::cout << "A lista de tiro não eh null" << std::endl;
+            //std::cout << "A lista de tiro não eh null" << std::endl;
             if(auxDois != NULL){
                 if(this->Distancia(auxDois->valor->posicao_x, auxUm->valor->posicao_x, 
                                     auxDois->valor->posicao_y, auxUm->valor->posicao_y, 
@@ -202,6 +203,7 @@ using namespace std;
                     this->Remover(auxUm->valor);
                     auxUm = aux_prox;
                     n->kills++;
+                    impacto = true; 
                 }
                 else{
                     auxUm = auxUm->prox;
@@ -211,6 +213,7 @@ using namespace std;
                 auxUm = auxUm->prox;
             }
         }
+        return impacto;
         cout << "Quantidade de kill da nave eh de: " << n->kills << endl;
     }
 

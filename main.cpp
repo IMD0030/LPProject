@@ -5,7 +5,6 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
-#include <typeinfo>
 #include <string>
 #include <cstring>
 #include "Nave.h"
@@ -44,7 +43,7 @@ int main() {
 	ALLEGRO_DISPLAY *tela = al_create_display(LARGURA, ALTURA);
 	ALLEGRO_TIMER *timer = al_create_timer(1.0/30.0);
     ALLEGRO_EVENT_QUEUE *fila_eventos = al_create_event_queue();
-    ALLEGRO_SAMPLE *sample=NULL;
+    ALLEGRO_SAMPLE *shoot=NULL, *explosion=NULL;
     ALLEGRO_EVENT evento;
     ALLEGRO_KEYBOARD_STATE estado_teclado;
 
@@ -54,9 +53,9 @@ int main() {
 	al_init_primitives_addon();
 	al_init_acodec_addon();
 	al_install_audio();	
-	al_reserve_samples(1);
-	sample = al_load_sample( "Sound/StarWars.ogg" );
-
+	al_reserve_samples(10);
+	shoot = al_load_sample( "Sound/shoot.ogg" );
+	explosion = al_load_sample("Sound/explosion.wav");
 	/*Iniciar Eventos */
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source());
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
@@ -85,12 +84,7 @@ int main() {
 
 		al_wait_for_event(fila_eventos, &evento);
 		al_get_keyboard_state(&estado_teclado);
-		/*if(al_get_sample_instance_playing(*sample)){
-			cout << "Musica continua tocando, quando parar eu pego a proxima" << endl;
-		}
-		else{
-			cout << "A musica acabou, agora eu pegaria a proxima e apagaria a anterior, e a fila ta feita"<<endl;
-		}*/
+		
 		if(al_key_down(&estado_teclado, ALLEGRO_KEY_W) || al_key_down(&estado_teclado, ALLEGRO_KEY_UP)) {
 			navePlayer->Up();
 		}
@@ -112,7 +106,7 @@ int main() {
 			}
 			if(evento.keyboard.keycode == ALLEGRO_KEY_SPACE){
 				bullet->Novo(*navePlayer, ListaBullets);
-				cout << "KEYDOWN: " << evento.keyboard.keycode << endl;
+				al_play_sample(shoot, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 			}
 			if(evento.keyboard.keycode == ALLEGRO_KEY_I){
 				while(oldastPX == astPX){
@@ -134,11 +128,7 @@ int main() {
 		}
 		oldastPX=astPX;
 		velPY = rand()%(10-2)+2;
-		velPY = 2;		
-
-		/*if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-			l->MouseDown(evento.mouse.x, evento.mouse.y);
-		}*/
+		velPY = 2;
 
 		if (evento.type == ALLEGRO_EVENT_TIMER) {
 			
@@ -165,9 +155,12 @@ int main() {
 			ListaBullets->Update();
 			ListaAsteroides->Update();
 			navePlayer->Impacto(ListaAsteroides);
-			//cout << "A QUANTIDADE DE INIMIGOS QUE TENHO SÃO DE : " << ListaAsteroides->ObjectCont() << endl;
+			
 
-			ListaBullets->ImpactoFirstElement(navePlayer, ListaAsteroides);
+			if(ListaBullets->ImpactoFirstElement(navePlayer, ListaAsteroides)){
+				al_play_sample(explosion, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
+
+			}
 		}
 
 	}

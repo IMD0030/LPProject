@@ -42,7 +42,7 @@ public:
 
 	void Impacto(GameObjectList *Lista);
 
-	void ImpactoFirstElement(Nave *n, GameObjectList *Lista);
+	bool ImpactoFirstElement(Nave *n, GameObjectList *Lista);
 
 	int MouseDown(float x, float y);
 };
