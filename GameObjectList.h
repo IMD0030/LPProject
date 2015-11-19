@@ -28,6 +28,8 @@ public:
 
 	void RemoverSeq(GameObject *item);
 
+	void LimparLista();
+
 	void Remover(GameObject *item);
 
 	void Render();

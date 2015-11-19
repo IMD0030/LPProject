@@ -17,7 +17,7 @@ Nave::Nave(int px, int py){
 	this->tamanho = Utils::getTamanhoDaNave();
 	this->municao = 100;
     this->movimento = Utils::getMovimento();
-	this->kills =0;
+	this->kills=0;
 }
 
 void Nave::Up(){
@@ -30,8 +30,8 @@ void Nave::Up(){
 }
 
 void Nave::Down(){
-	if (this->p_y + this->tamanho >= 600) {
-		this->p_y = 600 - this->tamanho;
+	if (this->p_y + this->tamanho >= Utils::getAlturaTela()) {
+		this->p_y = Utils::getAlturaTela() - this->tamanho;
 	}
 	else {
 		this->p_y+=movimento;
@@ -48,8 +48,8 @@ void Nave::Left(){
 }
 
 void Nave::Right(){
-    if (this->p_x >= 800 - this->tamanho) {
-        this->p_x = 800 - this->tamanho;
+    if (this->p_x >= Utils::getLarguraTela() - this->tamanho) {
+        this->p_x = Utils::getLarguraTela() - this->tamanho;
     }
     else {
         this->p_x+=movimento;

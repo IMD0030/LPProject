@@ -56,6 +56,22 @@ using namespace std;
         }
     }
 
+    void GameObjectList::LimparLista() {
+        if(this->inicio != NULL){
+            NoDaLista *aux = this->inicio;
+            NoDaLista *aux_prox = NULL;
+            while(aux != NULL){
+                aux_prox = aux->prox;
+                delete(aux->valor);
+                delete(aux);
+                aux = aux_prox;
+            }
+            delete(aux_prox);
+            delete(aux);
+        }
+        this->inicio=NULL;
+    }
+
     void GameObjectList::Remover(GameObject *item){
         if(this->inicio == NULL) {
             cout << "Lista vazia" << endl;

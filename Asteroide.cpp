@@ -13,7 +13,7 @@ Asteroide::Asteroide() {
 void Asteroide::Novo(GameObjectList *Asteroides, float px, float vel){
 	Asteroide *ast = new Asteroide();
 	ast->posicao_x = px;
-	ast->posicao_y = 0;
+	ast->posicao_y = Utils::getAlturaInfo();
 	ast->velocidade_y = vel;
 	ast->size=Utils::getAsteroideSize();
 	ast->power=25;
@@ -28,15 +28,15 @@ void Asteroide::Start(){
 void Asteroide::Update(){
 	//std :: cout << "esse Asteroide tem velocidade" << this->velocidade_y<< std::endl;
     this->posicao_y += this->velocidade_y;
-	if (this->posicao_y >= 600) {
-		this->posicao_y = 600;
+	if (this->posicao_y >= Utils::getAlturaTela()) {
+		this->posicao_y = Utils::getAlturaTela();
 		//std :: cout << "esse Asteroide precisa ser destruida" << std::endl;
 		//return 1;
 	}
 }
 
 bool Asteroide::Devo_Morrer(){
-	if(this->posicao_y >= 600){
+	if(this->posicao_y >= Utils::getAlturaTela()){
 		std::cout<<"Devo morrer é verdade"<<std::endl;
 		return true;
 	}

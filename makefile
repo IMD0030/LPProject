@@ -17,7 +17,7 @@ GameObjectList.o: GameObject.o GameObjectList.h GameObjectList.cpp
 	g++ GameObjectList.cpp -c
 
 main: main.cpp Utils.o Nave.o GameObject.o GameObjectList.o Bullet.o Asteroide.o
-	g++ main.cpp Utils.o Nave.o GameObject.o GameObjectList.o Bullet.o Asteroide.o -lallegro_audio -lallegro_acodec -lallegro -lallegro_primitives -lallegro_main -o main 
+	g++ main.cpp Utils.o Nave.o GameObject.o GameObjectList.o Bullet.o Asteroide.o -lallegro_font -lallegro_ttf -lallegro_audio -lallegro_acodec -lallegro -lallegro_primitives -lallegro_main -o main 
 
 clean:
 	rm -f *.o main

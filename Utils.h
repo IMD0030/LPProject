@@ -4,6 +4,7 @@
 #include <allegro5/allegro.h>
 #include <string>
 #include <sstream>
+#include <stdio.h>
 
 using namespace std;
 
@@ -23,6 +24,10 @@ class Utils {
 
 		static int getAlturaTela();
 
+		static int getAlturaInfo();
+
+		static int getStartAltura();
+
 		static int getAsteroideSize();
 
 		static int getPosicaoAst(int px);
@@ -33,6 +38,7 @@ class Utils {
 
 		static int getMaximoInimigo();
 
+		//static char manipular_entrada(ALLEGRO_EVENT evento);
 };
 
 #endif

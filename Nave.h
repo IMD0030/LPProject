@@ -38,7 +38,6 @@ public:
 	void Impacto(GameObjectList *Lista);
 
 	bool DevoMorrer();
-
 };
 
 #endif
