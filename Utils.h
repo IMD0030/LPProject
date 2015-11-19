@@ -1,10 +1,11 @@
 #ifndef UTILS_H_INCLUDED
 #define UTILS_H_INCLUDED
 #include <iostream>
-#include <allegro5/allegro.h>
 #include <string>
 #include <sstream>
+#include <fstream>
 #include <stdio.h>
+#include <allegro5/allegro.h>
 
 using namespace std;
 
@@ -37,6 +38,8 @@ class Utils {
 		static int getFrequenciaInimigo();
 
 		static int getMaximoInimigo();
+
+		static string getNumberToString(int number);
 
 		//static char manipular_entrada(ALLEGRO_EVENT evento);
 };

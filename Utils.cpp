@@ -3,8 +3,8 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
-#include <iostream>
 #include <allegro5/allegro.h>
+#include <fstream>
 #include <string>
 #include <sstream>
 #include <stdio.h>
@@ -77,6 +77,14 @@ int Utils::getFrequenciaInimigo(){
 
 int Utils::getMaximoInimigo(){
 	return 10;
+}
+
+string Utils::getNumberToString(int number){
+	string Result;          // string which will contain the result
+	ostringstream convert;   // stream used for the conversion
+	convert << number;      // insert the textual representation of 'Number' in the characters in the stream
+	Result = convert.str();
+	return Result;
 }
 
 

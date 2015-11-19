@@ -12,7 +12,7 @@
 #include "GameObjectList.h"
 #include "Bullet.h"
 #include "Utils.h"
-#include <string.h>
+#include <string>
 #include <sstream>
 #include <fstream>
 #include <string>
@@ -113,18 +113,20 @@ int main() {
 			        if (evento.keyboard.keycode == ALLEGRO_KEY_BACKSPACE && strlen(str) != 0){
 	            		str[strlen(str) - 1] = '\0';
 	        		}
+	            	//std::getline (std::cin,nome);
 			    }
 			    if (evento.type == ALLEGRO_EVENT_KEY_DOWN && evento.keyboard.keycode == ALLEGRO_KEY_ENTER){
-			    	//strcat(str,string('I'));
                     concluido = true;
-                    string line;
 			        ofstream myfile ("data/raking.txt");
-			        stringstream ss;
-
-			        ss << str;
-					ss >> line;
+			        string raking(str);
+			        raking.append("|"); 
+			        raking.append(Utils::getNumberToString(navePlayer->kills));
+			        cout << "A String eh " << raking << endl;
+			        cout << "String inserida foi: " << raking;
+			        //ss << str;
+					//ss >> line;
 			        if (myfile.is_open()){
-			        	myfile << line;//+"|"+navePlayer->kills+<<endl;
+			        	myfile << raking;//+"|"+navePlayer->kills+<<endl;
 			        	/*myfile << "This is a line.\n";
 					    myfile << "This is another line.\n";*/
 					    myfile.close();
