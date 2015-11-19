@@ -41,6 +41,8 @@ class Utils {
 
 		static string getNumberToString(int number);
 
+		static int getStringToNumber(string str);
+
 		//static char manipular_entrada(ALLEGRO_EVENT evento);
 };
 

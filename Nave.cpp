@@ -21,8 +21,8 @@ Nave::Nave(int px, int py){
 }
 
 void Nave::Up(){
-	if (this->p_y <= 0) {
-		this->p_y = 0;
+	if (this->p_y <= Utils::getAlturaInfo()) {
+		this->p_y = Utils::getAlturaInfo();
 	}
 	else {
 		this->p_y-=movimento;
@@ -99,13 +99,24 @@ void Nave::Impacto(GameObjectList *Lista){
         if(Lista->Distancia(aux->valor->posicao_x, centrox, 
              aux->valor->posicao_y, centroy, 
               aux->valor->size, this->tamanho)){
-            aux_prox = aux->prox;
+            if(aux->prox != NULL){
+                aux_prox = aux->prox;
+            }
+            else {
+                aux_prox = NULL;
+            }
             Lista->Remover(aux->valor);
             aux= aux_prox;
             this->vida = this->vida - 25;
             ///cout << "Nave ATINGIDA, HOUSTON, WE HAVE A PROBLEM A VIDA EH " << this->vida  << endl;
         }
-        aux=aux->prox;
+        if(aux!= NULL){
+            aux=aux->prox;    
+        }
+        else{
+            aux = NULL;
+        }
+        
     }
 }	
 

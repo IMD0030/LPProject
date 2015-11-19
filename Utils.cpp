@@ -87,6 +87,15 @@ string Utils::getNumberToString(int number){
 	return Result;
 }
 
+int Utils::getStringToNumber(string str){
+	int Result;          //number which will contain the result
+	istringstream convert(str); // stringstream used for the conversion constructed with the contents of 'Text' 
+                             // ie: the stream will start containing the characters of 'Text'
+	if ( !(convert >> Result) ){
+		Result = 0;
+	} //give the value to 'Result' using the characters in the stream
+	return Result;
+}
 
 /*char manipular_entrada(ALLEGRO_EVENT evento){
 	char *str[17];

@@ -117,18 +117,30 @@ int main() {
 			    }
 			    if (evento.type == ALLEGRO_EVENT_KEY_DOWN && evento.keyboard.keycode == ALLEGRO_KEY_ENTER){
                     concluido = true;
+                    string line;
+                    string player;
+                    int pontos;
+                    ifstream abrir ("data/raking.txt");
+                    if (abrir.is_open()){
+                    	while (! abrir.eof() ){
+                    		getline (abrir,line);
+                    		cout << line << endl;
+                    		player=line.substr(0,line.find("|"));
+                    		pontos=Utils::getStringToNumber(line.substr(line.find("|")));
+                    		cout << "Player: " << player << " Pontos: " << pontos << endl;
+
+					    }
+					    abrir.close();
+					}
+
 			        ofstream myfile ("data/raking.txt");
 			        string raking(str);
 			        raking.append("|"); 
 			        raking.append(Utils::getNumberToString(navePlayer->kills));
 			        cout << "A String eh " << raking << endl;
 			        cout << "String inserida foi: " << raking;
-			        //ss << str;
-					//ss >> line;
 			        if (myfile.is_open()){
-			        	myfile << raking;//+"|"+navePlayer->kills+<<endl;
-			        	/*myfile << "This is a line.\n";
-					    myfile << "This is another line.\n";*/
+			        	myfile << raking;
 					    myfile.close();
 					    cout << "Raking salvo" << endl;
 					}
@@ -155,14 +167,14 @@ int main() {
     			myfile.close();
   			}*/
 
-			/*if(evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
+			if(evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
 				if(evento.mouse.y >= 286 && evento.mouse.y >= 328 && evento.mouse.y <=351 && evento.mouse.x <=507){
 					cout << "Começar um novo jogo"<<endl;
 				}
 				else if(evento.mouse.x >= 274 && evento.mouse.x <=525 && evento.mouse.y >=304 && evento.mouse.y <=323 ){
 					finalized=true;
 				}
-			}*/
+			}
 			//al_flip_display();	
 		}
 		//al_draw_text(fonte, al_map_rgb(255,0,0), Utils::getLarguraTela()/2, Utils::getAlturaTela()/2,ALLEGRO_ALIGN_CENTRE, "GAME OVER!");
@@ -198,7 +210,6 @@ int main() {
 					astInimigo++;
 					if(astInimigo >= Utils::getFrequenciaInimigo() && ListaAsteroides->ObjectCont() < Utils::getMaximoInimigo()){
 						aste->Novo(ListaAsteroides, astPX, Utils::getVelocidadeAsteroide());
-						//aste->Novo(ListaAsteroides, Utils::getLarguraTela()+1, 2);
 						astInimigo = 0;
 					}
 
