@@ -1,12 +1,12 @@
 #ifndef BULLET_H_INCLUDED
 #define BULLET_H_INCLUDED
-#define SIZEBULLET 5
 #include <iostream>
 #include <cstring>
 #include <allegro5/allegro.h>
 #include "GameObject.h"
 #include <math.h> 
 #include "Nave.h"
+#include "Utils.h"
 
 class Bullet: public GameObject{
 	public:

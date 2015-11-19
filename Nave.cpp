@@ -5,16 +5,18 @@
 #include <allegro5/allegro_primitives.h>
 #include "Nave.h"
 #include "GameObjectList.h"
+#include "Utils.h"
 
 using namespace std;
 
 
 Nave::Nave(int px, int py){
-	this->vida = MAX_VIDA;
+	this->vida = Utils::getMaxVida();
 	this->p_x = px;
-	this->p_y = py-TAMANHO_NAVE;
-	this->tamanho = TAMANHO_NAVE;
+	this->p_y = py-Utils::getTamanhoDaNave();
+	this->tamanho = Utils::getTamanhoDaNave();
 	this->municao = 100;
+    this->movimento = Utils::getMovimento();
 	this->kills =0;
 }
 
@@ -23,7 +25,7 @@ void Nave::Up(){
 		this->p_y = 0;
 	}
 	else {
-		this->p_y-=MOVIMENTO;
+		this->p_y-=movimento;
 	}
 }
 
@@ -32,7 +34,7 @@ void Nave::Down(){
 		this->p_y = 600 - this->tamanho;
 	}
 	else {
-		this->p_y+=MOVIMENTO;
+		this->p_y+=movimento;
 	}
 }
 
@@ -41,7 +43,7 @@ void Nave::Left(){
         this->p_x = 0;
     }
     else {
-        this->p_x-=MOVIMENTO;
+        this->p_x-=movimento;
     }
 }
 
@@ -50,7 +52,7 @@ void Nave::Right(){
         this->p_x = 800 - this->tamanho;
     }
     else {
-        this->p_x+=MOVIMENTO;
+        this->p_x+=movimento;
     }
 }
 
@@ -102,16 +104,16 @@ void Nave::Impacto(GameObjectList *Lista){
             aux= aux_prox;
             this->vida = this->vida - 25;
             ///cout << "Nave ATINGIDA, HOUSTON, WE HAVE A PROBLEM A VIDA EH " << this->vida  << endl;
-            if(this->vida <= 0){
-                cout << "DESCULPE, MAS O JOGO ACABOU, O JOGO TERMINOU, DESTRUA A NAVE" << endl;
-                cout << "DESCULPE, MAS O JOGO ACABOU, O JOGO TERMINOU, DESTRUA A NAVE" << endl;
-                cout << "DESCULPE, MAS O JOGO ACABOU, O JOGO TERMINOU, DESTRUA A NAVE" << endl;
-                cout << "DESCULPE, MAS O JOGO ACABOU, O JOGO TERMINOU, DESTRUA A NAVE" << endl;
-                cout << "DESCULPE, MAS O JOGO ACABOU, O JOGO TERMINOU, DESTRUA A NAVE" << endl;
-                cout << "DESCULPE, MAS O JOGO ACABOU, O JOGO TERMINOU, DESTRUA A NAVE" << endl;
-
-            }
         }
         aux=aux->prox;
     }
 }	
+
+bool Nave::DevoMorrer(){
+    if(this->vida <=0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}

@@ -5,16 +5,17 @@
 #include "GameObject.h"
 #include "GameObjectList.h"
 #include "Asteroide.h"
+#include "Utils.h"
 
 Asteroide::Asteroide() {
 }
 
-void Asteroide::Novo(GameObjectList *Asteroides, float px, int s, float vel){
+void Asteroide::Novo(GameObjectList *Asteroides, float px, float vel){
 	Asteroide *ast = new Asteroide();
 	ast->posicao_x = px;
 	ast->posicao_y = 0;
 	ast->velocidade_y = vel;
-	ast->size=10;
+	ast->size=Utils::getAsteroideSize();
 	ast->power=25;
 	Asteroides->Adicionar(ast);
 }

@@ -9,7 +9,30 @@ using namespace std;
 
 class Utils {
 	public:
-		static string NumberToString ( int Number );
+		static int getSizeBullet();
+
+		static int getVelocidadeBullet();
+
+		static int getTamanhoDaNave();
+
+		static int getMaxVida();
+
+		static int getMovimento();
+
+		static int getLarguraTela();
+
+		static int getAlturaTela();
+
+		static int getAsteroideSize();
+
+		static int getPosicaoAst(int px);
+
+		static int getVelocidadeAsteroide();
+
+		static int getFrequenciaInimigo();
+
+		static int getMaximoInimigo();
+
 };
 
 #endif

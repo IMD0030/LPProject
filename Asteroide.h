@@ -16,7 +16,7 @@ class Asteroide: public GameObject{
 
 		Asteroide();
 
-		void Novo(GameObjectList *Asteroides, float px, int s, float vel);
+		void Novo(GameObjectList *Asteroides, float px, float vel);
 
 		void Start();
 

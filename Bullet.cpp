@@ -7,6 +7,7 @@
 #include "Bullet.h"
 #include <math.h> 
 #include "Nave.h"
+#include "Utils.h"
 
 Bullet::Bullet() {
 	
@@ -16,8 +17,8 @@ void Bullet::Novo(Nave n, GameObjectList *Bullets) {
 	Bullet *tiro = new Bullet();
 	tiro->posicao_x = n.p_x + n.tamanho/2;
 	tiro->posicao_y = n.p_y;
-	tiro->size = SIZEBULLET;
-	tiro->velocidade_y = 15;
+	tiro->size = Utils::getSizeBullet();
+	tiro->velocidade_y = Utils::getVelocidadeBullet();
 	//std::cout << "Bala adicionada x: "<< n.p_x << " e y: " << n.p_y << std::endl;
 	Bullets->Adicionar(tiro);
 }

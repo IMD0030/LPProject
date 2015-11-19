@@ -1,8 +1,5 @@
 #ifndef _NAVE_H_
 #define _NAVE_H_
-#define MAX_VIDA 100
-#define TAMANHO_NAVE 25
-#define MOVIMENTO 5
 #include <iostream>
 #include <cstring>
 #include <typeinfo>
@@ -19,6 +16,7 @@ public:
 	int tamanho;
 	int municao;
 	int kills;
+	int movimento;
 
 
 	Nave(int px = 0, int py=0);
@@ -38,6 +36,8 @@ public:
 	void Render();
 
 	void Impacto(GameObjectList *Lista);
+
+	bool DevoMorrer();
 
 };
 
