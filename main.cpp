@@ -41,7 +41,7 @@ int main() {
 	ALLEGRO_DISPLAY *tela = al_create_display(Utils::getLarguraTela(), Utils::getAlturaTela());
 	ALLEGRO_TIMER *timer = al_create_timer(1.0/30.0);
     ALLEGRO_EVENT_QUEUE *fila_eventos = al_create_event_queue();
-    ALLEGRO_SAMPLE *shoot=NULL, *explosion=NULL;
+    ALLEGRO_SAMPLE *shoot=NULL, *explosion=NULL, *shipExplosion=NULL;
     ALLEGRO_EVENT evento;
     ALLEGRO_KEYBOARD_STATE estado_teclado;
 
@@ -51,12 +51,13 @@ int main() {
 	al_init_primitives_addon();
 	al_init_acodec_addon();
 	al_install_audio();	
-	al_reserve_samples(10);
+	al_reserve_samples(15);
 	al_init_font_addon();
 	al_init_ttf_addon();
 
 	shoot = al_load_sample( "Sound/shoot.ogg" );
-	explosion = al_load_sample("Sound/explosion.wav");
+	shipExplosion = al_load_sample("Sound/shipImpact.ogg");
+	explosion = al_load_sample("Sound/meteoroCrash.ogg");
 	ALLEGRO_FONT *fonte = al_load_ttf_font("fonte/ARCADE.TTF", 50, 0);
 	ALLEGRO_FONT *digitar = al_load_ttf_font("fonte/LDFComicSans.ttf", 20,0);
 	/*Iniciar Eventos */
@@ -245,13 +246,12 @@ int main() {
 					ListaBullets->Update();
 					ListaAsteroides->Update();
 					if(navePlayer->Impacto(ListaAsteroides)){
-						cout <<"TOCA EXPLOSAO DA NAVE" << endl;
+						al_play_sample(shipExplosion, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 					}
 					
 
 					if(ListaBullets->ImpactoFirstElement(navePlayer, ListaAsteroides)){
 						al_play_sample(explosion, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
-
 					}	
 				}
 				else{
@@ -274,7 +274,7 @@ int main() {
 				else if(evento.keyboard.keycode == 59 || evento.keyboard.keycode==ALLEGRO_KEY_ESCAPE) {
 					finalized = true;
 				}
-				else if(evento.keyboard.keycode == ALLEGRO_KEY_SPACE){
+				else if(evento.keyboard.keycode == ALLEGRO_KEY_SPACE && navePlayer->DevoMorrer() == false){
 					bullet->Novo(*navePlayer, ListaBullets);
 					al_play_sample(shoot, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 				}
