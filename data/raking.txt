@@ -1,1 +1,6 @@
-Reuel|3
+NNNNNNN|15
+Wesley|10
+Mmmm|6
+ Wesley Reuel|3
+Teste de u|3
+!!

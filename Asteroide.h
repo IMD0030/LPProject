@@ -8,7 +8,6 @@
 
 class Asteroide: public GameObject{
 	public:
-		int id, ponto;
 		float vida;
 		int power;
 

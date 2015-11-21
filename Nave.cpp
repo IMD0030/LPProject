@@ -88,13 +88,13 @@ void Nave::Render(){
     al_draw_filled_rectangle(this->p_x, this->p_y, this->p_x+tamanho, this->p_y+tamanho, al_map_rgb(255, 0, 0));
 }
 
-void Nave::Impacto(GameObjectList *Lista){
+bool Nave::Impacto(GameObjectList *Lista){
     NoDaLista *aux = Lista->inicio;
     NoDaLista *aux_prox;
     float centrox, centroy;
     centrox = this->p_x + this->tamanho/2;
     centroy= this->p_y+this->tamanho/2;
-
+    //cout<<"Verificando impacto da nave: "<<endl;
     while(aux !=NULL){
         if(Lista->Distancia(aux->valor->posicao_x, centrox, 
              aux->valor->posicao_y, centroy, 
@@ -108,6 +108,7 @@ void Nave::Impacto(GameObjectList *Lista){
             Lista->Remover(aux->valor);
             aux= aux_prox;
             this->vida = this->vida - 25;
+            return true;
             ///cout << "Nave ATINGIDA, HOUSTON, WE HAVE A PROBLEM A VIDA EH " << this->vida  << endl;
         }
         if(aux!= NULL){
@@ -116,8 +117,8 @@ void Nave::Impacto(GameObjectList *Lista){
         else{
             aux = NULL;
         }
-        
     }
+    return false;
 }	
 
 bool Nave::DevoMorrer(){

@@ -6,6 +6,8 @@
 #include <fstream>
 #include <stdio.h>
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 
 using namespace std;
 
@@ -42,6 +44,12 @@ class Utils {
 		static string getNumberToString(int number);
 
 		static int getStringToNumber(string str);
+
+		static ALLEGRO_FONT *getFonte();
+
+		static ALLEGRO_FONT *getFonteAlvo();
+
+		static int getCountChar(string str, string i);
 
 		//static char manipular_entrada(ALLEGRO_EVENT evento);
 };

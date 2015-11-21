@@ -10,13 +10,13 @@ class GameObjectList;
 
 class GameObject{
     public:
-		std::string nome;
 		float posicao_x, posicao_y;
 		float velocidade_x, velocidade_y;
 		float atrito;
 		float size;
+		int id;
 
-		GameObject(std::string nome="", float px=0, float py=0, float vx=0, float vy=0, float atr=0, float s=0);
+		GameObject(float px=0, float py=0, float vx=0, float vy=0, float atr=0, float s=0);
 
 		virtual void Start();
 

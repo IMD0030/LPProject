@@ -4,6 +4,8 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -29,7 +31,7 @@ int Utils::getMaxVida(){
 }
 
 int Utils::getMovimento(){
-	return 5;
+	return 7;
 }
 
 int Utils::getLarguraTela(){
@@ -95,6 +97,27 @@ int Utils::getStringToNumber(string str){
 		Result = 0;
 	} //give the value to 'Result' using the characters in the stream
 	return Result;
+}
+
+ALLEGRO_FONT *Utils::getFonte(){
+	ALLEGRO_FONT *fonte = al_load_ttf_font("fonte/ARCADE.TTF", 50, 0);
+	return fonte;
+}
+
+
+ALLEGRO_FONT *Utils::getFonteAlvo(){
+	ALLEGRO_FONT *fonte = al_load_ttf_font("fonte/Timeless.ttf",15,0);
+	return fonte;
+}
+
+int Utils::getCountChar(string str, string busca){
+	int count = 0;
+	for (int i = 0; i < str.size(); i++){
+		if (str[i] == busca[0]){
+			count++;	
+		} 
+	}
+  return count;
 }
 
 /*char manipular_entrada(ALLEGRO_EVENT evento){

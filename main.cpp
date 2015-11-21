@@ -5,7 +5,6 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
-#include <string>
 #include <cstring>
 #include "Nave.h"
 #include "GameObject.h"
@@ -15,8 +14,9 @@
 #include <string>
 #include <sstream>
 #include <fstream>
-#include <string>
 #include "Asteroide.h"
+#include "RankingList.h"
+#include "Ranking.h"
 
 using namespace std;
 
@@ -72,10 +72,12 @@ int main() {
     /*OBJETOS DO JOGO, BALAS E INIMIGOS */
     Bullet *bullet = new Bullet();
     Asteroide *aste = new Asteroide();
-
+    Ranking *rk = new Ranking();
+    
     /*Lista de Objetos (Inimigos ou Asteroides)*/
     GameObjectList *ListaBullets = new GameObjectList();
     GameObjectList *ListaAsteroides = new GameObjectList();
+    RankingList *ListaDoRanking = new RankingList();
     al_clear_to_color(al_map_rgb(255, 255, 255));
     al_flip_display();
     strcpy(str, ""); 
@@ -113,36 +115,66 @@ int main() {
 			        if (evento.keyboard.keycode == ALLEGRO_KEY_BACKSPACE && strlen(str) != 0){
 	            		str[strlen(str) - 1] = '\0';
 	        		}
-	            	//std::getline (std::cin,nome);
 			    }
 			    if (evento.type == ALLEGRO_EVENT_KEY_DOWN && evento.keyboard.keycode == ALLEGRO_KEY_ENTER){
                     concluido = true;
                     string line;
                     string player;
-                    int pontos;
+                    int pontos=0;
                     ifstream abrir ("data/raking.txt");
+                    cout<<"O Nome digitado foi: " << str << endl;
                     if (abrir.is_open()){
-                    	while (! abrir.eof() ){
+                    	while (! abrir.eof()){
                     		getline (abrir,line);
-                    		cout << line << endl;
-                    		player=line.substr(0,line.find("|"));
-                    		pontos=Utils::getStringToNumber(line.substr(line.find("|")));
-                    		cout << "Player: " << player << " Pontos: " << pontos << endl;
-
+                    		if(line == "!!" ){
+                    			break;
+                    		}
+                    		else{
+	                    		cout << line << endl;
+	                    		player=line.substr(0,line.find("|"));
+	                    		//cout << "A linha ficou assim, apos a quebra: " << line << endl;
+	                    		//cout << "O ponto deve ficar assim: " << line.find("|") << endl;
+	                    		//cout << "A Pontuacao é: " << line.substr(line.find("|"));
+	                    		pontos=Utils::getStringToNumber(line.substr(line.find("|")+1));
+	                    		//cout << "Player: " << player << " Pontos: " << pontos << endl;
+	                    		rk->Novo(ListaDoRanking, player, pontos);
+                    		}
 					    }
 					    abrir.close();
+					    ///string retornoDaLista;
+					    /*retornoDaLista = ListaDoRanking->RetornarLista();
+					    cout << "A string montada eh " << retornoDaLista << endl;
+					    cout << "Sai do Retornar Lista" << endl;*/
 					}
 
 			        ofstream myfile ("data/raking.txt");
 			        string raking(str);
 			        raking.append("|"); 
 			        raking.append(Utils::getNumberToString(navePlayer->kills));
-			        cout << "A String eh " << raking << endl;
-			        cout << "String inserida foi: " << raking;
+			        //cout << "A String eh " << raking << endl;
+			        //cout << "String inserida foi: " << raking << endl;
+			        Ranking *nrk = new Ranking(str, navePlayer->kills);
+			        ListaDoRanking->AdicionarSeq(nrk);
+			        string retornoDaLista = ListaDoRanking->RetornarLista();
+					//cout << "A string montada eh " << retornoDaLista << endl;
+					//cout << "Sai do Retornar Lista" << endl;
+					int qtdRanking = Utils::getCountChar(retornoDaLista, ";");
+					string inserir;
+					int busca;
 			        if (myfile.is_open()){
-			        	myfile << raking;
+			        	//cout << "A quantidade de ; eh de " << qtdRanking << endl;
+			        	//cout << "Entrei no arquivo aberto" << endl;
+			        	for (int i = 0; i < qtdRanking; ++i){
+			        		busca = retornoDaLista.find(";");
+			        		inserir = retornoDaLista.substr(0,busca);
+			        		myfile << inserir+"\n";
+			        		retornoDaLista = retornoDaLista.erase(0,busca+1);
+			        		//cout << "O Retorno depois de apagado ficou: " << retornoDaLista << endl;
+			        	}
+			        	inserir = "!!";
+			        	myfile << inserir;
 					    myfile.close();
-					    cout << "Raking salvo" << endl;
+					    //cout << "Raking salvo" << endl;
 					}
                 }
             }   
@@ -155,17 +187,6 @@ int main() {
     		}
  			al_flip_display();
 	        al_clear_to_color(al_map_rgb(255, 255, 255));
-
-
-	        
-	        /*ifstream myfile ("data/raking.txt");
-	        if (myfile.is_open()){
-	        	while (! myfile.eof() ){
-		      		getline (myfile,line);
-		      		cout << line << endl;
-    			}
-    			myfile.close();
-  			}*/
 
 			if(evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
 				if(evento.mouse.y >= 286 && evento.mouse.y >= 328 && evento.mouse.y <=351 && evento.mouse.x <=507){
@@ -223,11 +244,13 @@ int main() {
 					// atualizar estado
 					ListaBullets->Update();
 					ListaAsteroides->Update();
-					navePlayer->Impacto(ListaAsteroides);
+					if(navePlayer->Impacto(ListaAsteroides)){
+						cout <<"TOCA EXPLOSAO DA NAVE" << endl;
+					}
 					
 
 					if(ListaBullets->ImpactoFirstElement(navePlayer, ListaAsteroides)){
-						//al_play_sample(explosion, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
+						al_play_sample(explosion, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 
 					}	
 				}
@@ -253,7 +276,7 @@ int main() {
 				}
 				else if(evento.keyboard.keycode == ALLEGRO_KEY_SPACE){
 					bullet->Novo(*navePlayer, ListaBullets);
-					//al_play_sample(shoot, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
+					al_play_sample(shoot, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 				}
 			break;
 

@@ -47,6 +47,8 @@ public:
 	bool ImpactoFirstElement(Nave *n, GameObjectList *Lista);
 
 	int MouseDown(float x, float y);
+
+	int idLastObject();
 };
 
 #endif // GAMEOBJECTLIST_H_INCLUDED

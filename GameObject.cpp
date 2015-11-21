@@ -6,8 +6,7 @@
 #include "GameObject.h"
 
 
-GameObject::GameObject(std::string nome, float px, float py, float vx, float vy, float atr, float s){
-	this->nome = nome;
+GameObject::GameObject(float px, float py, float vx, float vy, float atr, float s){
 	this->posicao_x = px;
 	this->posicao_y = py;
 	this->velocidade_x=vx;
@@ -17,7 +16,6 @@ GameObject::GameObject(std::string nome, float px, float py, float vx, float vy,
 }
 
 void GameObject::Start(){
-	std::cout << "Eu sou um objeto de nome: " << this->nome << "." << std::endl;
 }
 
 void GameObject::Update(){
@@ -30,7 +28,6 @@ bool GameObject::Devo_Morrer(){
 }
 
 void GameObject::Render(){
-	std::cout << "Eu renderizei meu objeto: " << this->nome << "." << std::endl;
 }
 
 int GameObject::MouseDown(float x, float y){

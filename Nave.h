@@ -35,7 +35,7 @@ public:
 
 	void Render();
 
-	void Impacto(GameObjectList *Lista);
+	bool Impacto(GameObjectList *Lista);
 
 	bool DevoMorrer();
 };

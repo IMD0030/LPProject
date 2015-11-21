@@ -267,3 +267,22 @@ using namespace std;
         }
         return 0;
     }
+
+    int GameObjectList::idLastObject(){
+        NoDaLista *aux = this->inicio;
+        int id = 0;
+        while(aux != NULL){
+            //cout << "contando os objetos" << endl;
+            id = aux->valor->id;
+            cout << "Id do Asteroid é: " << id << endl;
+            if(aux->prox != NULL){
+                aux = aux->prox;
+                //id = aux->valor->id;
+            }
+            else{
+                break;
+            }
+        }
+        cout << "Id do Asteroide retornado eh: " << id << endl;
+        return id;
+    }
