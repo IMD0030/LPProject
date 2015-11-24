@@ -88,6 +88,13 @@ int main() {
 		al_get_keyboard_state(&estado_teclado);
 		al_draw_filled_rectangle(0, 0, Utils::getLarguraTela(), Utils::getAlturaInfo(), al_map_rgb(0, 0, 0));
 		al_draw_textf(fonte, al_map_rgb(255,0,0), 0, 0,  0, "Kills: %d    Life: %d", navePlayer->kills, navePlayer->vida);
+		/*if(menu){
+
+		}
+		else{
+
+		}*/
+
 		//if(true){
 		if(navePlayer->DevoMorrer()){
 			al_draw_text(fonte, al_map_rgb(255,0,0), Utils::getLarguraTela()/2, (Utils::getAlturaTela()/2)-al_get_font_ascent(fonte),ALLEGRO_ALIGN_CENTRE, "GAME OVER!");
@@ -204,7 +211,7 @@ int main() {
 		switch(evento.type){
 			case ALLEGRO_EVENT_TIMER:
 				//if(true){
-				if(!navePlayer->DevoMorrer()){
+				if(!navePlayer->DevoMorrer() ){
 					if(al_key_down(&estado_teclado, ALLEGRO_KEY_W) || al_key_down(&estado_teclado, ALLEGRO_KEY_UP)) {
 						navePlayer->Up();
 					}
@@ -274,7 +281,7 @@ int main() {
 				else if(evento.keyboard.keycode == 59 || evento.keyboard.keycode==ALLEGRO_KEY_ESCAPE) {
 					finalized = true;
 				}
-				else if(evento.keyboard.keycode == ALLEGRO_KEY_SPACE && navePlayer->DevoMorrer() == false){
+				else if(evento.keyboard.keycode == ALLEGRO_KEY_SPACE && navePlayer->DevoMorrer() == false && pause == false){
 					bullet->Novo(*navePlayer, ListaBullets);
 					al_play_sample(shoot, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 				}
