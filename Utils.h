@@ -51,6 +51,8 @@ class Utils {
 
 		static int getCountChar(string str, string i);
 
+		static char *getStringToChar(string str);
+
 		//static char manipular_entrada(ALLEGRO_EVENT evento);
 };
 

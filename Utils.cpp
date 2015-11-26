@@ -120,6 +120,15 @@ int Utils::getCountChar(string str, string busca){
   return count;
 }
 
+char *Utils::getStringToChar(string str){
+	char *a=new char[str.size()+1];
+	a[str.size()]=0;
+	memcpy(a,str.c_str(),str.size());
+	return a;
+}
+
+
+
 /*char manipular_entrada(ALLEGRO_EVENT evento){
 	char *str[17];
 	if (strlen(str) <= 16){

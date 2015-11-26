@@ -91,3 +91,21 @@ void RankingList::AdicionarSeq(Ranking *r){
 		}
 	}
 }
+
+void RankingList::LimparLista() {
+    if(this->inicio != NULL)
+    {
+    	NoDoRanking *aux = this->inicio;
+        NoDoRanking *aux_prox = NULL;
+        while(aux != NULL)
+        {
+        	aux_prox = aux->prox;
+            delete(aux->valor);
+            delete(aux);
+            aux = aux_prox;
+		}
+        delete(aux_prox);
+        delete(aux);
+    }
+	this->inicio=NULL;
+}

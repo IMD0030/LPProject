@@ -28,6 +28,8 @@ public:
 
 	void AdicionarSeq(Ranking *r);
 
+	void LimparLista();
+
 	//void InserirNaOrdem(Ranking *r);
 
 };

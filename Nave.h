@@ -19,7 +19,7 @@ public:
 	int movimento;
 
 
-	Nave(int px = 0, int py=0);
+	Nave();
 
 	void Up();
 
@@ -38,6 +38,7 @@ public:
 	bool Impacto(GameObjectList *Lista);
 
 	bool DevoMorrer();
+
 };
 
 #endif

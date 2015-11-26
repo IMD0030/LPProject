@@ -10,10 +10,10 @@
 using namespace std;
 
 
-Nave::Nave(int px, int py){
+Nave::Nave(){
 	this->vida = Utils::getMaxVida();
-	this->p_x = px;
-	this->p_y = py-Utils::getTamanhoDaNave();
+	this->p_x = Utils::getLarguraTela()/2;
+	this->p_y = Utils::getAlturaTela()-Utils::getTamanhoDaNave();
 	this->tamanho = Utils::getTamanhoDaNave();
 	this->municao = 100;
     this->movimento = Utils::getMovimento();
@@ -58,7 +58,10 @@ void Nave::Right(){
 
 
 void Nave::Start(){
-    std::cout << "Nave Inciada!" << std::endl;
+    this->vida = Utils::getMaxVida();
+    this->p_x = Utils::getLarguraTela()/2;
+    this->p_y = Utils::getAlturaTela()-Utils::getTamanhoDaNave();
+    this->kills=0;
 }
 
 void Nave::Update(ALLEGRO_EVENT e){
