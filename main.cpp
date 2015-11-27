@@ -142,21 +142,20 @@ int main() {
 	        ifstream abrir ("data/raking.txt");
 	        if (abrir.is_open()){
 	        	al_flip_display();
-	        	//al_clear_to_color(al_map_rgb(255, 255, 255));
-	        	while (! abrir.eof() && cont != 7){
-	        		getline (abrir,line);
-	                if(line == "!!"){
-	                	break;
-	                }
-	                else{
-	                	cont++;
-	                	cout << line << endl;
-		                player=line.substr(0,line.find("|"));
-		                pontos=line.substr(line.find("|")+1);
-		                al_draw_textf(fonte, al_map_rgb(255,0,0), 25, y,  0, "Player: %s    Kills: %s", Utils::getStringToChar(player), Utils::getStringToChar(pontos));
-		                y = y+al_get_font_ascent(fonte) +5;
-		            }
-				}
+	        	al_clear_to_color(al_map_rgb(255, 255, 255));
+	        	if (abrir.is_open()){
+	        	//al_clear_to_color(al_map_rgb(255, 255, 255)); antigo
+		        	for (int i = 0; i < 7; ++i){
+		        		getline (abrir,line);
+		        		if(line != "!!"){
+		                	//cout << line << endl;
+			                player=line.substr(0,line.find("|"));
+			                pontos=line.substr(line.find("|")+1);
+			                al_draw_textf(fonte, al_map_rgb(255,0,0), 25, y,  0, "Player: %s    Kills: %s", Utils::getStringToChar(player), Utils::getStringToChar(pontos));   
+		                	y = y+al_get_font_ascent(fonte) +5;
+		                }
+		        	}
+		        }
 				al_draw_text(fonte, al_map_rgb(255,0,0), 80, 515-al_get_font_ascent(fonte),ALLEGRO_ALIGN_LEFT, "Voltar");
 				al_draw_text(fonte, al_map_rgb(255,0,0), 580, 515-al_get_font_ascent(fonte),ALLEGRO_ALIGN_LEFT, "Sair");
 				abrir.close();
@@ -213,7 +212,7 @@ int main() {
 		            		str[strlen(str) - 1] = '\0';
 		        		}
 				    }
-				    if (evento.type == ALLEGRO_EVENT_KEY_DOWN && evento.keyboard.keycode == ALLEGRO_KEY_ENTER){
+				    if (evento.type == ALLEGRO_EVENT_KEY_DOWN && (evento.keyboard.keycode == ALLEGRO_KEY_ENTER || evento.keyboard.keycode == 91 )){
 	                    concluido = true;
 	                    string line;
 	                    string player;
@@ -287,12 +286,10 @@ int main() {
 		        al_clear_to_color(al_map_rgb(255, 255, 255));
 		        al_draw_text(fonte, al_map_rgb(255,0,0), 80, 515-al_get_font_ascent(fonte),ALLEGRO_ALIGN_LEFT, "Menu");
 				al_draw_text(fonte, al_map_rgb(255,0,0), 580, 515-al_get_font_ascent(fonte),ALLEGRO_ALIGN_LEFT, "Sair");
-				//trabalhando aaqui
 				if(evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
 					cout << "Mouse Px: " << evento.mouse.x << " Py: " << evento.mouse.y << endl;
 					//abrir o ranking
-					if (evento.mouse.x >=82 && evento.mouse.x <=177 && evento.mouse.y >= 483 && evento.mouse.y <=505){
-						//al_clear_to_color(al_map_rgb(255, 255, 255));
+					if (concluido == true && evento.mouse.x >=82 && evento.mouse.x <=177 && evento.mouse.y >= 483 && evento.mouse.y <=505){
 						cout << "Devo ir pra o menu" << endl;
 						menu = true;
 						strcpy(str, "");

@@ -1,12 +1,14 @@
-NNNNNNN|15
-Wesley|14
-WesleyREUELM|11
-WWesley|10
-Wesley|10
-wESLEY|9
-Wesley|6
+Primeiro|15
+Segundo|14
+Terceiro|11
+Quarto|10
+Quinto|10
+Sexto|9
+Teste|6
+Setimo|6
 Mmmm|6
 WR|4
+wesley|3
 Perdi|3
 Wesley|3
  Wesley Reuel|3
@@ -26,6 +28,8 @@ Perdeu|1
 W|1
 W|1
 Wesley|1
+tESTE|0
+|0
 w|0
 asadfas|0
 aaaa|0
@@ -36,4 +40,9 @@ W|0
 Wes|0
 wes|0
 Wes|0
+yyyyy|0
+Bel|0
+jhjh|1
+prof|2
+Wesley Reuel|5
 !!
