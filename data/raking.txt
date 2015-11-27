@@ -28,6 +28,7 @@ Perdeu|1
 W|1
 W|1
 Wesley|1
+T|0
 tESTE|0
 |0
 w|0

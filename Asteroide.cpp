@@ -24,14 +24,10 @@ void Asteroide::Start(){
     std::cout << "Iniciei!" << std::endl;
 }
 
-//void Asteroide::Update(GameObject *item, GameObjectList *Lista){
 void Asteroide::Update(){
-	//std :: cout << "esse Asteroide tem velocidade" << this->velocidade_y<< std::endl;
     this->posicao_y += this->velocidade_y;
 	if (this->posicao_y >= Utils::getAlturaTela()) {
 		this->posicao_y = Utils::getAlturaTela();
-		//std :: cout << "esse Asteroide precisa ser destruida" << std::endl;
-		//return 1;
 	}
 }
 
@@ -46,7 +42,5 @@ bool Asteroide::Devo_Morrer(){
 }
 
 void Asteroide::Render(){
-	//ALLEGRO_FONT *fonte = al_load_ttf_font("fonte/Timeless.ttf",15,0);
     al_draw_filled_circle(this->posicao_x, this->posicao_y, this->size, al_map_rgb(0, 0,255));
-    //al_draw_textf(Utils::getFonteAlvo(), al_map_rgb(0,0,0), this->posicao_x-6, this->posicao_y-6,  0, "%d", this->id);
 }

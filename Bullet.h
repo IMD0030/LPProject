@@ -21,8 +21,6 @@ class Bullet: public GameObject{
 
 		void Update();
 
-		//void Update(GameObject *item, GameObjectList *Lista);
-
 		bool Devo_Morrer();
 
 		void Render();

@@ -19,8 +19,6 @@ void GameObject::Start(){
 }
 
 void GameObject::Update(){
-//void GameObject::Update(GameObject *item, GameObjectList *Lista){
-	//std::cout << "Eu atualizei meu objeto: " << this->nome << "." << std::endl;
 }
 
 bool GameObject::Devo_Morrer(){
@@ -35,9 +33,5 @@ int GameObject::MouseDown(float x, float y){
 }
 
 void GameObject::AplicarForca(float x, float y, float forca){
-	//this->posicao_x += x;
-	//this->posicao_y += y;
-	//this->velocidade_x= 
-	//this->velocidade_y=
 }
 

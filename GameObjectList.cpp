@@ -18,16 +18,6 @@ using namespace std;
 
 
 	void GameObjectList::Adicionar(GameObject *item) {
-	    /*NoDaLista *novo = new NoDaLista();
-        novo->prox = NULL;
-        novo->valor = item; 
-
-        NoDaLista *aux = lista;
-        while (aux->prox != NULL) {
-            aux = aux->prox;
-        }
-        aux->prox = novo;*/
-
         NoDaLista * novo = new NoDaLista();
         novo->valor = item;
         novo->prox = NULL;
@@ -114,7 +104,6 @@ using namespace std;
         }
     }
 
-    //void GameObjectList::Update(GameObjectList *Lista){
     void GameObjectList::Update(){
         NoDaLista *aux = inicio;
         while (aux != NULL){
@@ -146,28 +135,10 @@ using namespace std;
                     }
                     cout << "removendo um asteroid"<<endl<<endl<<endl;
                     Lista->Remover(auxDois->valor);
-                    //cout << "Tudo foi removido com classe" << endl;
-                    //cout << "Passando o proximo para o atual" << endl;
                     auxDois = aux_prox;
                     cout << "Valor de auxDois depois de removido: ";
-                    //cout << auxDois->valor->posicao_x << endl;
-
-                    /*aux_prox = auxUm->prox;
-                    this->Remover(auxUm->valor);
-                    auxUm = aux_prox;*/
 
                     cout << "quantidade de asteroides: " << Lista->ObjectCont() << endl;
-                    //delete(aux_prox);
-                    /*if(auxUm->prox!=NULL){
-                        auxUm=auxUm->prox;
-                    }
-                    if(auxDois->prox!=NULL){
-                        auxDois=auxDois->prox;
-                    }*/
-                    /*morrerUM = auxUm;
-                    auxUm = auxUm->prox;
-                    morrerDois = auxDois;
-                    auxDois = auxDois->prox;*/
                 }
                 cout << "Atribuindo um novo valor" << endl;
                 if(auxDois != NULL){
@@ -180,26 +151,8 @@ using namespace std;
                 cout << "Atribuindo a bala para a proxima" << endl;
                 auxUm=auxUm->prox;    
             }
-            cout << "quantidade de balas: " << this->ObjectCont() << endl;
-            
+            cout << "quantidade de balas: " << this->ObjectCont() << endl;            
         }
-        /*else{
-            std::cout << "nao existe" << std::endl;
-        }*/
-        /*while(auxUm != NULL){
-            while(auxDois !=NULL){
-                if(sqrt((auxDois->valor->posicao_x - auxUm->valor->posicao_x) * (auxDois->valor->posicao_x - auxUm->valor->posicao_x) + 
-                        (auxDois->valor->posicao_y - auxUm->valor->posicao_y) * (auxDois->valor->posicao_y - auxUm->valor->posicao_y)) 
-                        <= auxUm->valor->size + auxDois->valor->size){
-                    std::cout << "Existem elementos para serem destruidos" << std::endl;
-                    this->Remover(auxUm->valor);
-                    Lista->Remover(auxDois->valor);
-                }
-                auxDois=auxDois->prox;
-            }
-            auxUm=auxUm->prox;
-        }*/
-        //cout << "balas devem ser zero: " << this->ObjectCont() << endl;
     }
 
     bool GameObjectList::ImpactoFirstElement(Nave *n, GameObjectList *Lista){
@@ -207,7 +160,6 @@ using namespace std;
         NoDaLista *auxDois = Lista->inicio;
         bool impacto = false;
         while(auxUm != NULL){
-            //std::cout << "A lista de tiro não eh null" << std::endl;
             if(auxDois != NULL){
                 if(this->Distancia(auxDois->valor->posicao_x, auxUm->valor->posicao_x, 
                                     auxDois->valor->posicao_y, auxUm->valor->posicao_y, 
@@ -238,7 +190,6 @@ using namespace std;
         NoDaLista *aux = this->inicio;
         int qtd = 0;
         while(aux != NULL){
-            //cout << "contando os objetos" << endl;
             aux = aux->prox;
             qtd++;
         }
@@ -254,9 +205,7 @@ using namespace std;
     }
 
     int GameObjectList::MouseDown(float x, float y){
-        NoDaLista *aux = inicio;
-        std::cout<<"Posicao do x do clic: " << x << std::endl;
-        std::cout<<"Posicao do y do clic: " << y << std::endl;    
+        NoDaLista *aux = inicio;    
         while (aux != NULL)
         {
             if(aux->valor->MouseDown(x,y)) {
@@ -272,12 +221,10 @@ using namespace std;
         NoDaLista *aux = this->inicio;
         int id = 0;
         while(aux != NULL){
-            //cout << "contando os objetos" << endl;
             id = aux->valor->id;
             cout << "Id do Asteroid é: " << id << endl;
             if(aux->prox != NULL){
                 aux = aux->prox;
-                //id = aux->valor->id;
             }
             else{
                 break;

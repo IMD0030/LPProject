@@ -20,7 +20,6 @@ public:
 class GameObjectList {
 public:
     NoDaLista *inicio;
-    //float tam_x, tam_y;
 
     GameObjectList();
 
@@ -39,8 +38,6 @@ public:
 	int ObjectCont();
 
 	bool Distancia(int pxdois, int pxum, int pydois, int pyum, float sizedois, float sizeum);
-
-	//void Update(GameObjectList *Lista);
 
 	void Impacto(GameObjectList *Lista);
 

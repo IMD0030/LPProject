@@ -11,8 +11,6 @@ class Asteroide: public GameObject{
 		float vida;
 		int power;
 
-		//Asteroide(std::string nome="Asteroide", float px=0, float py=0, float vx=0, float vy=0, float atr=0, float r=1);
-
 		Asteroide();
 
 		void Novo(GameObjectList *Asteroides, float px, float vel);
@@ -20,8 +18,6 @@ class Asteroide: public GameObject{
 		void Start();
 
 		void Update();
-
-		//void Update(GameObject *item, GameObjectList *Lista);
 
 		bool Devo_Morrer();
 

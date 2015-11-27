@@ -20,8 +20,6 @@ class GameObject{
 
 		virtual void Start();
 
-		//virtual void Update(GameObject *item, GameObjectList *Lista);
-
 		virtual void Update();
 
 		virtual bool Devo_Morrer();
