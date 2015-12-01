@@ -154,6 +154,9 @@ int main() {
 			                al_draw_textf(fonte, al_map_rgb(255,0,0), 25, y,  0, "Player: %s    Kills: %s", Utils::getStringToChar(player), Utils::getStringToChar(pontos));   
 		                	y = y+al_get_font_ascent(fonte) +5;
 		                }
+		                else{
+		                	break;
+		                }
 		        	}
 		        }
 				al_draw_text(fonte, al_map_rgb(255,0,0), 80, 515-al_get_font_ascent(fonte),ALLEGRO_ALIGN_LEFT, "Voltar");
@@ -250,10 +253,13 @@ int main() {
 				        //cout << "A String eh " << raking << endl;
 				        //cout << "String inserida foi: " << raking << endl;
 				        Ranking *nrk = new Ranking(str, navePlayer->kills);
-				        ListaDoRanking->AdicionarSeq(nrk);
+				        ListaDoRanking->Adicionar(nrk);
+				        cout << "Devo organizar a lista agora";
+				        ListaDoRanking->AdicionarOrdenar();
+				        cout << "Sai da lista" <<endl;
 				        string retornoDaLista = ListaDoRanking->RetornarLista();
-						//cout << "A string montada eh " << retornoDaLista << endl;
-						//cout << "Sai do Retornar Lista" << endl;
+						cout << "A string montada eh " << retornoDaLista << endl;
+						cout << "Sai do Retornar Lista" << endl;
 						int qtdRanking = Utils::getCountChar(retornoDaLista, ";");
 						string inserir;
 						int busca;

@@ -1,49 +1,13 @@
-Primeiro|15
-Segundo|14
-Terceiro|11
-Quarto|10
-Quinto|10
-Sexto|9
-Teste|6
-Setimo|6
-Mmmm|6
-WR|4
-wesley|3
-Perdi|3
-Wesley|3
- Wesley Reuel|3
-Teste de u|3
-Wesley|2
-ijkh|2
-OP|2
-Wesl|2
-Wes|2
-Wesley|2
-Wes|1
-qaa|1
-aaaaaaaaa|1
-aasda|1
-W|1
-Perdeu|1
-W|1
-W|1
-Wesley|1
+Wesley Final|10
+Terceiro|8
+Final|8
+Felipe|8
+WR|7
+Quarto|5
+Quinto|2
+Primeiro|1
+Segundo|1
+Wesley REuel|1
 T|0
-tESTE|0
-|0
-w|0
-asadfas|0
-aaaa|0
-aaa|0
-aas|0
-Wes|0
-W|0
-Wes|0
-wes|0
-Wes|0
-yyyyy|0
-Bel|0
-jhjh|1
-prof|2
-Wesley Reuel|5
+TT|0
 !!

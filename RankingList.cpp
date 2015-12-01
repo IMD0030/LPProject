@@ -76,7 +76,7 @@ void RankingList::AdicionarSeq(Ranking *r){
 			cout << "!!!!!!!!!!!!!!!!!!!!!!!!! Entrando no while !!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 			cout << "O nome do Current eh: " << current->valor->nome << " A pontuaçao eh " << current->valor->kills << endl;
 			cout << "O nome do Old eh: " << old->valor->nome << " A pontuaçao eh " << old->valor->kills << endl;
-			if(/*current->prox == NULL || */novo->valor->kills >= current->valor->kills){
+			if(current->prox == NULL || novo->valor->kills >= current->valor->kills){
 				novo->prox = current;
 				old->prox = novo;
 				cout << "Adicionei e agora? " << endl;
@@ -91,6 +91,148 @@ void RankingList::AdicionarSeq(Ranking *r){
 		}
 	}
 }
+
+
+/*void insertion_sort (int arr[], int length){
+	 	int j, temp;
+		
+	for (int i = 0; i < length; i++){
+		j = i;
+		
+		while (j > 0 && arr[j] < arr[j-1]){
+			  temp = arr[j];
+			  arr[j] = arr[j-1];
+			  arr[j-1] = temp;
+			  j--;
+			  }
+		}
+}*/
+
+/*void RankingList::Ordernar(RankingList *pList){
+	NoDoRanking *aux, *temp = new NoDoRanking();
+	aux = pList->inicio;
+	while(aux != NULL){
+		while(aux->valor->kills < aux->prox->valor->kills){
+			temp = aux;
+			aux = aux->prox;
+			aux-
+		}
+	}
+
+
+
+    // head is the first element of resulting sorted list
+    /*NoDoRanking *head = NULL;
+
+    while(pList != NULL) {
+
+        struct LIST * current = pList;
+        pList = pList->pNext;
+        if(head == NULL || current->iValue < head->iValue) {
+            // insert into the head of the sorted list
+            // or as the first element into an empty sorted list
+            current->pNext = head;
+            head = current;
+        } else {
+            // insert current element into proper position in non-empty sorted list
+            struct LIST * p = head;
+            while(p != NULL) {
+                if(p->pNext == NULL || // last element of the sorted list
+                   current->iValue < p->pNext->iValue) // middle of the list
+                {
+                    // insert into middle of the sorted list or as the last element
+                    current->pNext = p->pNext;
+                    p->pNext = current;
+                    break; // done
+                }
+                p = p->pNext;
+            }
+        }
+    }
+    return head;
+}
+
+	
+}*/
+
+
+void RankingList::AdicionarOrdenar(){
+	NoDoRanking *current = this->inicio;
+	NoDoRanking *old = NULL;
+	//Item *head = lista;
+	NoDoRanking *next = current->prox;
+	bool troca = true;
+
+	while(troca) {
+		troca = false;
+		current = this->inicio;
+		old = NULL;
+		next = current->prox;
+		while (next != NULL) {
+			cout << "Valor do current eh " <<current->valor->kills << " e do next eh " << next->valor->kills;
+			if (current->valor->kills < next->valor->kills) {
+				troca = true;
+				if (old == NULL) {
+					current->prox = next->prox;
+					next->prox = current;
+
+					this->inicio = next;
+					
+				} else {// if (next->prox == NULL) {
+
+					old->prox = next;
+					current->prox = next->prox;
+					next->prox = current;
+					
+				}
+
+				// avança
+				old = next;
+				// current já aponta pra o local certo
+				next = current->prox;
+
+			} else {
+				// somenta avança
+				old = current;
+				current = current->prox;
+				next = next->prox;			
+			}
+
+			//mostra(head);
+
+		}
+	}
+}
+
+/*
+novo->prox = current;
+				old->prox = novo;
+				cout << "Adicionei e agora? " << endl;
+				break;
+
+
+ while(p != NULL) {
+                if(p->pNext == NULL || current->iValue < p->pNext->iValue) // middle of the list
+                {
+                    // insert into middle of the sorted list or as the last element
+                    current->pNext = p->pNext;
+                    p->pNext = current;
+                    break; // done
+                }
+                p = p->pNext;
+
+	int j, temp;
+		
+	for (int i = 0; i < length; i++){
+		j = i;
+		
+		while (j > 0 && arr[j] < arr[j-1]){
+			  temp = arr[j];
+			  arr[j] = arr[j-1];
+			  arr[j-1] = temp;
+			  j--;
+			  }
+		}*/
 
 void RankingList::LimparLista() {
     if(this->inicio != NULL)

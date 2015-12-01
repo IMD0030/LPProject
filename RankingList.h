@@ -30,6 +30,10 @@ public:
 
 	void LimparLista();
 
+	//void AdicionarOrdenado(Ranking *r);
+
+	void AdicionarOrdenar();
+
 	//void InserirNaOrdem(Ranking *r);
 
 };
