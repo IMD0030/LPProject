@@ -97,7 +97,7 @@ using namespace std;
     }
 
     void GameObjectList::Render(){
-        NoDaLista *aux = inicio;
+        NoDaLista *aux = this->inicio;
         while (aux != NULL){
             aux->valor->Render();
             aux = aux->prox;
@@ -105,7 +105,7 @@ using namespace std;
     }
 
     void GameObjectList::Update(){
-        NoDaLista *aux = inicio;
+        NoDaLista *aux =this-> inicio;
         while (aux != NULL){
             aux->valor->Update();
             if(aux->valor->Devo_Morrer()){
@@ -204,7 +204,7 @@ using namespace std;
     }
 
     int GameObjectList::MouseDown(float x, float y){
-        NoDaLista *aux = inicio;    
+        NoDaLista *aux = this-> inicio;    
         while (aux != NULL)
         {
             if(aux->valor->MouseDown(x,y)) {
