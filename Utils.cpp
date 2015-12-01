@@ -126,29 +126,3 @@ char *Utils::getStringToChar(string str){
 	memcpy(a,str.c_str(),str.size());
 	return a;
 }
-
-
-
-/*char manipular_entrada(ALLEGRO_EVENT evento){
-	char *str[17];
-	if (strlen(str) <= 16){
-		char temp[] = {evento.keyboard.unichar, '\0'};
-        if (evento.keyboard.unichar == ' '){
-        	strcat(str, temp);
-        }
-        else if (evento.keyboard.unichar >= '0' && evento.keyboard.unichar <= '9'){
-        	strcat(str, temp);
-        }
-        else if (evento.keyboard.unichar >= 'A' && evento.keyboard.unichar <= 'Z'){
-        	strcat(str, temp);
-        }
-        else if (evento.keyboard.unichar >= 'a' && evento.keyboard.unichar <= 'z'){
-        	strcat(str, temp);
-        }
-    }
-    if (evento.keyboard.keycode == ALLEGRO_KEY_BACKSPACE && strlen(str) != 0)
-    {
-            str[strlen(str) - 1] = '\0';
-    }
-    return *str;
-}*/

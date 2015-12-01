@@ -33,7 +33,7 @@ void Asteroide::Update(){
 
 bool Asteroide::Devo_Morrer(){
 	if(this->posicao_y >= Utils::getAlturaTela()){
-		std::cout << "Id do Asteroide que vai morrer eh " << this->id <<"Devo morrer é verdade"<<std::endl;
+		//std::cout << "Id do Asteroide que vai morrer eh " << this->id <<"Devo morrer é verdade"<<std::endl;
 		return true;
 	}
 	else{

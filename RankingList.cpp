@@ -31,17 +31,17 @@ void RankingList::Adicionar(Ranking *r){
 string RankingList::RetornarLista(){
 	NoDoRanking *aux;
 	string str;
-	cout<<"Chamou a lista"<<endl;
+	//cout<<"Chamou a lista"<<endl;
 	if(this->inicio == NULL){
 		str.append("Lista Vazia");
 		return str;
 	}
 	else{
 		aux=this->inicio;
-		cout<<"Entrou no else"<<endl;
+		//cout<<"Entrou no else"<<endl;
 		while(aux !=NULL){
-			cout<<"Tou no while"<<endl;
-			cout<<"Imprimindo os nomes " << aux->valor->nome<<endl;
+			//cout<<"Tou no while"<<endl;
+			//cout<<"Imprimindo os nomes " << aux->valor->nome<<endl;
 			str.append(aux->valor->nome);
 			str.append("|");
 			str.append(Utils::getNumberToString(aux->valor->kills));
@@ -56,7 +56,7 @@ string RankingList::RetornarLista(){
 						
 		}
 	}
-	cout << "Todos os nomes sao: " << str << endl;
+	//cout << "Todos os nomes sao: " << str << endl;
 	return str;
 }
 
@@ -73,13 +73,13 @@ void RankingList::AdicionarSeq(Ranking *r){
 		current = this->inicio->prox;
 		old = this->inicio;
 		while(current!=NULL){
-			cout << "!!!!!!!!!!!!!!!!!!!!!!!!! Entrando no while !!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
-			cout << "O nome do Current eh: " << current->valor->nome << " A pontuaçao eh " << current->valor->kills << endl;
-			cout << "O nome do Old eh: " << old->valor->nome << " A pontuaçao eh " << old->valor->kills << endl;
+			//cout << "!!!!!!!!!!!!!!!!!!!!!!!!! Entrando no while !!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+			//cout << "O nome do Current eh: " << current->valor->nome << " A pontuaçao eh " << current->valor->kills << endl;
+			//cout << "O nome do Old eh: " << old->valor->nome << " A pontuaçao eh " << old->valor->kills << endl;
 			if(current->prox == NULL || novo->valor->kills >= current->valor->kills){
 				novo->prox = current;
 				old->prox = novo;
-				cout << "Adicionei e agora? " << endl;
+				//cout << "Adicionei e agora? " << endl;
 				break;
 			}
 			else if(current->prox == NULL){
@@ -92,74 +92,9 @@ void RankingList::AdicionarSeq(Ranking *r){
 	}
 }
 
-
-/*void insertion_sort (int arr[], int length){
-	 	int j, temp;
-		
-	for (int i = 0; i < length; i++){
-		j = i;
-		
-		while (j > 0 && arr[j] < arr[j-1]){
-			  temp = arr[j];
-			  arr[j] = arr[j-1];
-			  arr[j-1] = temp;
-			  j--;
-			  }
-		}
-}*/
-
-/*void RankingList::Ordernar(RankingList *pList){
-	NoDoRanking *aux, *temp = new NoDoRanking();
-	aux = pList->inicio;
-	while(aux != NULL){
-		while(aux->valor->kills < aux->prox->valor->kills){
-			temp = aux;
-			aux = aux->prox;
-			aux-
-		}
-	}
-
-
-
-    // head is the first element of resulting sorted list
-    /*NoDoRanking *head = NULL;
-
-    while(pList != NULL) {
-
-        struct LIST * current = pList;
-        pList = pList->pNext;
-        if(head == NULL || current->iValue < head->iValue) {
-            // insert into the head of the sorted list
-            // or as the first element into an empty sorted list
-            current->pNext = head;
-            head = current;
-        } else {
-            // insert current element into proper position in non-empty sorted list
-            struct LIST * p = head;
-            while(p != NULL) {
-                if(p->pNext == NULL || // last element of the sorted list
-                   current->iValue < p->pNext->iValue) // middle of the list
-                {
-                    // insert into middle of the sorted list or as the last element
-                    current->pNext = p->pNext;
-                    p->pNext = current;
-                    break; // done
-                }
-                p = p->pNext;
-            }
-        }
-    }
-    return head;
-}
-
-	
-}*/
-
-
 void RankingList::AdicionarOrdenar(){
 	NoDoRanking *current = this->inicio;
 	NoDoRanking *old = NULL;
-	//Item *head = lista;
 	NoDoRanking *next = current->prox;
 	bool troca = true;
 
@@ -169,7 +104,7 @@ void RankingList::AdicionarOrdenar(){
 		old = NULL;
 		next = current->prox;
 		while (next != NULL) {
-			cout << "Valor do current eh " <<current->valor->kills << " e do next eh " << next->valor->kills;
+			//cout << "Valor do current eh " <<current->valor->kills << " e do next eh " << next->valor->kills;
 			if (current->valor->kills < next->valor->kills) {
 				troca = true;
 				if (old == NULL) {
@@ -197,42 +132,9 @@ void RankingList::AdicionarOrdenar(){
 				current = current->prox;
 				next = next->prox;			
 			}
-
-			//mostra(head);
-
 		}
 	}
 }
-
-/*
-novo->prox = current;
-				old->prox = novo;
-				cout << "Adicionei e agora? " << endl;
-				break;
-
-
- while(p != NULL) {
-                if(p->pNext == NULL || current->iValue < p->pNext->iValue) // middle of the list
-                {
-                    // insert into middle of the sorted list or as the last element
-                    current->pNext = p->pNext;
-                    p->pNext = current;
-                    break; // done
-                }
-                p = p->pNext;
-
-	int j, temp;
-		
-	for (int i = 0; i < length; i++){
-		j = i;
-		
-		while (j > 0 && arr[j] < arr[j-1]){
-			  temp = arr[j];
-			  arr[j] = arr[j-1];
-			  arr[j-1] = temp;
-			  j--;
-			  }
-		}*/
 
 void RankingList::LimparLista() {
     if(this->inicio != NULL)

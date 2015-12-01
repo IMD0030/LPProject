@@ -93,19 +93,19 @@ int main() {
 		
 		if(menu){
 			al_clear_to_color(al_map_rgb(255, 255, 255));
-			al_draw_text(fonte, al_map_rgb(255,0,0), Utils::getLarguraTela()/2, (Utils::getAlturaTela()/2)-al_get_font_ascent(fonte),ALLEGRO_ALIGN_CENTRE, "NOME DO JOGO aqui");
+			al_draw_text(fonte, al_map_rgb(255,0,0), Utils::getLarguraTela()/2, (Utils::getAlturaTela()/2)-al_get_font_ascent(fonte),ALLEGRO_ALIGN_CENTRE, "SPACE DEFENDER");
 			al_draw_text(fonte, al_map_rgb(255,0,0), 300, 50,ALLEGRO_ALIGN_LEFT, "Novo Jogo");
 			al_draw_text(fonte, al_map_rgb(255,0,0), 80, 515-al_get_font_ascent(fonte),ALLEGRO_ALIGN_LEFT, "Ranking");
 			al_draw_text(fonte, al_map_rgb(255,0,0), 580, 515-al_get_font_ascent(fonte),ALLEGRO_ALIGN_LEFT, "Sair");
 			switch (evento.type){
 				case ALLEGRO_EVENT_KEY_DOWN:
-					cout << "KEYDOWN: " << evento.keyboard.keycode << endl;
+					//cout << "KEYDOWN: " << evento.keyboard.keycode << endl;
 					if(evento.keyboard.keycode == 59 || evento.keyboard.keycode==ALLEGRO_KEY_ESCAPE) {
 						finalized = true;
 						break;
 					}
 				case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-					cout << "Mouse Px: " << evento.mouse.x << " Py: " << evento.mouse.y << endl;
+					//cout << "Mouse Px: " << evento.mouse.x << " Py: " << evento.mouse.y << endl;
 					//abrir jogo
 					if (evento.mouse.x >=302 && evento.mouse.x <=525 && evento.mouse.y >= 59 && evento.mouse.y <=88){
 						al_clear_to_color(al_map_rgb(255, 255, 255));
@@ -123,7 +123,7 @@ int main() {
 						menu = false;
 						cont = 0;
 						cout << verranking << endl;
-						cout << "Devo ir pra o Ranking";
+						//cout << "Devo ir pra o Ranking";
 						break;
 					}
 					//sair
@@ -221,7 +221,7 @@ int main() {
 	                    string player;
 	                    int pontos=0;
 	                    ifstream abrir ("data/raking.txt");
-	                    cout<<"O Nome digitado foi: " << str << endl;
+	                    //cout<<"O Nome digitado foi: " << str << endl;
 	                    if (abrir.is_open()){
 	                    	while (! abrir.eof()){
 	                    		getline (abrir,line);
@@ -254,12 +254,12 @@ int main() {
 				        //cout << "String inserida foi: " << raking << endl;
 				        Ranking *nrk = new Ranking(str, navePlayer->kills);
 				        ListaDoRanking->Adicionar(nrk);
-				        cout << "Devo organizar a lista agora";
+				        //cout << "Devo organizar a lista agora";
 				        ListaDoRanking->AdicionarOrdenar();
-				        cout << "Sai da lista" <<endl;
+				        //cout << "Sai da lista" <<endl;
 				        string retornoDaLista = ListaDoRanking->RetornarLista();
-						cout << "A string montada eh " << retornoDaLista << endl;
-						cout << "Sai do Retornar Lista" << endl;
+						//cout << "A string montada eh " << retornoDaLista << endl;
+						//cout << "Sai do Retornar Lista" << endl;
 						int qtdRanking = Utils::getCountChar(retornoDaLista, ";");
 						string inserir;
 						int busca;
@@ -293,17 +293,17 @@ int main() {
 		        al_draw_text(fonte, al_map_rgb(255,0,0), 80, 515-al_get_font_ascent(fonte),ALLEGRO_ALIGN_LEFT, "Menu");
 				al_draw_text(fonte, al_map_rgb(255,0,0), 580, 515-al_get_font_ascent(fonte),ALLEGRO_ALIGN_LEFT, "Sair");
 				if(evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-					cout << "Mouse Px: " << evento.mouse.x << " Py: " << evento.mouse.y << endl;
+					//cout << "Mouse Px: " << evento.mouse.x << " Py: " << evento.mouse.y << endl;
 					//abrir o ranking
 					if (concluido == true && evento.mouse.x >=82 && evento.mouse.x <=177 && evento.mouse.y >= 483 && evento.mouse.y <=505){
-						cout << "Devo ir pra o menu" << endl;
+						//cout << "Devo ir pra o menu" << endl;
 						menu = true;
 						strcpy(str, "");
 						concluido = false;
 					}
 					if (evento.mouse.x >=583 && evento.mouse.x <=658 && evento.mouse.y >= 483 && evento.mouse.y <=505){
 						al_clear_to_color(al_map_rgb(255, 255, 255));
-						cout << "Devo encerrar" << endl;
+						//cout << "Devo encerrar" << endl;
 						finalized = true;
 					}
 				}	
@@ -399,24 +399,6 @@ int main() {
 							}
 							break;
 					}
-
-					/*if(evento.keyboard.keycode == ALLEGRO_KEY_P){
-						if (pause){
-							pause = false;
-							al_start_timer(timer);
-						}
-						else{
-							pause=true;
-							al_stop_timer(timer);
-						}
-					}
-					else if(evento.keyboard.keycode == 59 || evento.keyboard.keycode==ALLEGRO_KEY_ESCAPE) {
-						finalized = true;
-					}
-					else if(evento.keyboard.keycode == ALLEGRO_KEY_SPACE && navePlayer->DevoMorrer() == false && pause == false){
-						bullet->Novo(*navePlayer, ListaBullets);
-						al_play_sample(shoot, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
-					}*/
 				break;
 
 				case ALLEGRO_EVENT_DISPLAY_CLOSE:

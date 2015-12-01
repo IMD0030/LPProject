@@ -36,7 +36,7 @@ void Bullet::Update(){
 
 bool Bullet::Devo_Morrer(){
 	if(this->posicao_y <= 0){
-		std::cout<<"Devo morrer é verdade"<<std::endl;
+		//std::cout<<"Devo morrer é verdade"<<std::endl;
 		return true;
 	}
 	else{

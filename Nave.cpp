@@ -65,8 +65,8 @@ void Nave::Start(){
 }
 
 void Nave::Update(ALLEGRO_EVENT e){
-    std::cout << "Nave Atualizada!" << std::endl;
-    std::cout << "KEYDOWN: " << e.keyboard.keycode << endl;
+    //std::cout << "Nave Atualizada!" << std::endl;
+    //std::cout << "KEYDOWN: " << e.keyboard.keycode << endl;
     switch (e.keyboard.keycode) {
     	case ALLEGRO_KEY_D: case 83:
     		this->p_x+=10;
